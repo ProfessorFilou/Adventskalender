@@ -1,0 +1,742 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adventskalender | Unsere Schule</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap');
+
+:root {
+    --bg: #071321;
+    --gold: #e5c78b;
+    --text: #f4f5f7;
+    --muted: #a4b2c2;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(ellipse at 50% 0%, #193b55 0%, transparent 55%),
+        radial-gradient(ellipse at 100% 80%, #142e46 0%, transparent 45%),
+        var(--bg);
+    overflow-x: hidden;
+}
+
+/* SCHNEE */
+
+#snow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.snowflake {
+    position: absolute;
+    top: -15px;
+    color: white;
+    opacity: 0.55;
+    animation: snowfall linear infinite;
+    user-select: none;
+}
+
+@keyframes snowfall {
+    to {
+        transform: translate3d(35px, 110vh, 0) rotate(360deg);
+    }
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    max-width: 1150px;
+    margin: auto;
+    padding: 35px 24px 70px;
+}
+
+/* HEADER */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 85px;
+}
+
+.school-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    letter-spacing: .3px;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid #ffffff30;
+    background: #ffffff0b;
+    border-radius: 13px;
+    font-size: 21px;
+}
+
+.year {
+    border: 1px solid #ffffff25;
+    background: #ffffff09;
+    padding: 9px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    color: var(--gold);
+    letter-spacing: 2px;
+}
+
+/* INTRO */
+
+.hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 5px;
+    font-weight: 700;
+    margin-bottom: 23px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(45px, 7vw, 76px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -2px;
+}
+
+h1 span {
+    color: var(--gold);
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    margin-top: 19px;
+    line-height: 1.8;
+}
+
+.date-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding: 11px 18px;
+    border: 1px solid #ffffff1a;
+    border-radius: 30px;
+    background: #ffffff08;
+    font-size: 12px;
+    color: #d6dfeb;
+}
+
+/* KALENDER */
+
+.calendar-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.calendar-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.counter {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.door {
+    position: relative;
+    min-height: 155px;
+    border: 1px solid #ffffff20;
+    border-radius: 17px;
+    background:
+        linear-gradient(145deg, #17334b, #10273c);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .25s, border-color .25s, background .25s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 8px 25px #00000015;
+}
+
+.door::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #ffffff0c, transparent 55%);
+    pointer-events: none;
+}
+
+.door:hover:not(.locked) {
+    transform: translateY(-5px);
+    border-color: var(--gold);
+    background: linear-gradient(145deg, #244761, #16354e);
+}
+
+.door-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 47px;
+    color: #e6d0a6;
+    line-height: 1;
+}
+
+.door-icon {
+    font-size: 18px;
+    opacity: .85;
+}
+
+.door-label {
+    color: #aab9c8;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.door.opened {
+    border-color: #d7bd83;
+    background: linear-gradient(145deg, #284b57, #183a46);
+}
+
+.door.locked {
+    opacity: .55;
+    cursor: not-allowed;
+    filter: saturate(.55);
+}
+
+.door.locked .door-number {
+    color: #a0adba;
+}
+
+.door.locked .door-icon {
+    opacity: .55;
+}
+
+.door.opened .door-label {
+    color: var(--gold);
+}
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+    margin-top: 65px;
+    color: #8191a2;
+    font-size: 12px;
+    line-height: 2;
+}
+
+.footer-line {
+    width: 55px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 25px;
+    opacity: .7;
+}
+
+/* VIDEO MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: #020914eF;
+    backdrop-filter: blur(15px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.active {
+    display: flex;
+    animation: fadeIn .25s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    width: min(850px, 100%);
+    background: #101f30;
+    border: 1px solid #ffffff20;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 30px 100px #00000080;
+    animation: modalUp .3s ease;
+}
+
+@keyframes modalUp {
+    from { transform: translateY(20px) scale(.98); }
+    to { transform: translateY(0) scale(1); }
+}
+
+.modal-header {
+    padding: 22px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+}
+
+.modal-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 5px;
+}
+
+.close {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid #ffffff25;
+    color: white;
+    background: #ffffff0c;
+    cursor: pointer;
+    font-size: 19px;
+}
+
+.close:hover {
+    background: #ffffff25;
+}
+
+.video-container {
+    background: #050a11;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+}
+
+.video-placeholder {
+    text-align: center;
+    padding: 30px;
+}
+
+.play-icon {
+    width: 65px;
+    height: 65px;
+    border: 1px solid #e5c78b70;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 24px;
+    margin: 0 auto 20px;
+    color: var(--gold);
+}
+
+.video-placeholder h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.video-placeholder p {
+    font-size: 13px;
+    color: #8d9cac;
+    line-height: 1.7;
+}
+
+.modal-footer {
+    padding: 17px 24px;
+    color: #8e9eaf;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 650px) {
+    main {
+        padding: 22px 15px 45px;
+    }
+
+    .topbar {
+        margin-bottom: 65px;
+    }
+
+    .calendar {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .door {
+        min-height: 125px;
+        border-radius: 13px;
+    }
+
+    .door-number {
+        font-size: 38px;
+    }
+
+    .hero {
+        margin-bottom: 45px;
+    }
+
+    .calendar-heading h2 {
+        font-size: 21px;
+    }
+}
+
+@media (max-width: 370px) {
+    .calendar {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="snow"></div>
+
+<main>
+
+    <header class="topbar">
+        <div class="school-logo">
+            <div class="logo-icon">❄</div>
+            <span>UNSERE SCHULE</span>
+        </div>
+        <div class="year">ADVENT 2026</div>
+    </header>
+
+    <section class="hero">
+        <div class="eyebrow">Eine besondere Zeit beginnt</div>
+
+        <h1>24 Tage voller<br><span>Weihnachtszauber.</span></h1>
+
+        <p class="subtitle">
+            Ein kleiner Moment Freude für jeden Tag.<br>
+            Entdecke unsere 24 Überraschungen im Advent.
+        </p>
+
+        <div class="date-line">
+            ✦ &nbsp; 1. – 24. Dezember 2026
+        </div>
+    </section>
+
+    <section>
+        <div class="calendar-heading">
+            <h2>Dein Adventskalender</h2>
+            <div class="counter" id="counter">24 Türchen</div>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-line"></div>
+        <div>Mit Vorfreude gestaltet für unsere Schulgemeinschaft.</div>
+        <div>Frohe Weihnachten! ✦</div>
+    </footer>
+
+</main>
+
+<!-- VIDEO FENSTER -->
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+
+        <div class="modal-header">
+            <div>
+                <div class="modal-title" id="modalTitle">
+                    Türchen 1
+                </div>
+                <div class="modal-subtitle" id="modalSubtitle">
+                    Eine Überraschung wartet auf dich.
+                </div>
+            </div>
+
+            <button class="close" onclick="closeModal()">✕</button>
+        </div>
+
+        <div class="video-container">
+
+            <video id="video" controls playsinline>
+                Dein Browser unterstützt keine Videos.
+            </video>
+
+            <div class="video-placeholder" id="placeholder">
+                <div class="play-icon">▶</div>
+                <h3>Eine Überraschung wartet!</h3>
+                <p>
+                    Für dieses Türchen wurde noch kein Video hinterlegt.<br>
+                    Schau später noch einmal vorbei.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <span>✦ Adventskalender</span>
+            <span id="videoDay">1 / 24</span>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+/* =================================
+   EINSTELLUNGEN
+================================= */
+
+// TESTMODUS:
+// true = alle Türchen sind sofort geöffnet
+// false = nur das aktuelle Datum ist freigeschaltet
+
+const TEST_MODE = true;
+
+
+/* =================================
+   VIDEOS HINTERLEGEN
+================================= */
+
+// Hier später einfach die Video-URLs eintragen.
+// Beispiel:
+// 1: "videos/tuerchen-01.mp4"
+
+const videos = {
+
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+    6: "",
+    7: "",
+    8: "",
+    9: "",
+    10: "",
+    11: "",
+    12: "",
+    13: "",
+    14: "",
+    15: "",
+    16: "",
+    17: "",
+    18: "",
+    19: "",
+    20: "",
+    21: "",
+    22: "",
+    23: "",
+    24: ""
+
+};
+
+
+/* =================================
+   KALENDER ERSTELLEN
+================================= */
+
+const calendar = document.getElementById("calendar");
+
+function isUnlocked(day) {
+
+    if (TEST_MODE) return true;
+
+    const today = new Date();
+
+    return today.getMonth() === 11 &&
+           today.getDate() >= day;
+}
+
+function createCalendar() {
+
+    let unlockedCount = 0;
+
+    for (let day = 1; day <= 24; day++) {
+
+        const unlocked = isUnlocked(day);
+
+        if (unlocked) unlockedCount++;
+
+        const door = document.createElement("div");
+
+        door.className = "door " +
+            (unlocked ? "opened" : "locked");
+
+        door.innerHTML = `
+            <div class="door-icon">
+                ${unlocked ? "✦" : "🔒"}
+            </div>
+
+            <div class="door-number">
+                ${String(day).padStart(2, "0")}
+            </div>
+
+            <div class="door-label">
+                ${unlocked ? "Öffnen" : "Bald verfügbar"}
+            </div>
+        `;
+
+        if (unlocked) {
+            door.addEventListener("click", () => openDoor(day));
+        }
+
+        calendar.appendChild(door);
+    }
+
+    document.getElementById("counter").textContent =
+        unlockedCount + " von 24 geöffnet";
+
+}
+
+
+/* =================================
+   TÜRCHEN ÖFFNEN
+================================= */
+
+const modal = document.getElementById("modal");
+const video = document.getElementById("video");
+const placeholder = document.getElementById("placeholder");
+
+function openDoor(day) {
+
+    if (!isUnlocked(day)) return;
+
+    document.getElementById("modalTitle").textContent =
+        "Türchen " + day;
+
+    document.getElementById("modalSubtitle").textContent =
+        "Deine Überraschung vom " + day + ". Dezember";
+
+    document.getElementById("videoDay").textContent =
+        day + " / 24";
+
+    modal.classList.add("active");
+
+    video.pause();
+    video.removeAttribute("src");
+    video.load();
+
+    if (videos[day] && videos[day].trim() !== "") {
+
+        video.src = videos[day];
+
+        video.style.display = "block";
+        placeholder.style.display = "none";
+
+        video.load();
+
+    } else {
+
+        video.style.display = "none";
+        placeholder.style.display = "block";
+
+    }
+
+}
+
+function closeModal() {
+
+    modal.classList.remove("active");
+
+    video.pause();
+}
+
+modal.addEventListener("click", function(event) {
+
+    if (event.target === modal) {
+        closeModal();
+    }
+
+});
+
+document.addEventListener("keydown", function(event) {
+
+    if (event.key === "Escape") {
+        closeModal();
+    }
+
+});
+
+
+/* =================================
+   SCHNEEANIMATION
+================================= */
+
+const snow = document.getElementById("snow");
+
+for (let i = 0; i < 55; i++) {
+
+    const flake = document.createElement("div");
+
+    flake.className = "snowflake";
+    flake.textContent = "❄";
+
+    flake.style.left = Math.random() * 100 + "%";
+
+    flake.style.fontSize =
+        (Math.random() * 9 + 5) + "px";
+
+    flake.style.animationDuration =
+        (Math.random() * 12 + 10) + "s";
+
+    flake.style.animationDelay =
+        (Math.random() * -20) + "s";
+
+    snow.appendChild(flake);
+
+}
+
+
+/* START */
+
+createCalendar();
+
+</script>
+
+</body>
+</html>
