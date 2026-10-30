@@ -3,772 +3,334 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10171b">
 <title>Christmas Wonderland</title>
-<meta name="theme-color" content="#10151b">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --gold: #d8b875;
-  --gold-light: #f3dfaa;
-  --text: #f4f0e8;
-  --muted: #a9a9a5;
-  --glass: rgba(255,255,255,.055);
-  --line: rgba(255,255,255,.11);
+:root{
+  --gold:#d8b875;
+  --gold-light:#f4e4bd;
+  --glass:rgba(255,255,255,.055);
+  --line:rgba(255,255,255,.11);
 }
-
-* { box-sizing:border-box; }
-
-html { scroll-behavior:smooth; }
-
-body {
+*{box-sizing:border-box}
+body{
   margin:0;
   min-height:100vh;
-  color:var(--text);
+  color:#f4f0e8;
   font-family:Manrope,sans-serif;
   background:
-    radial-gradient(ellipse at 15% 12%,rgba(116,83,45,.22),transparent 36%),
-    radial-gradient(ellipse at 85% 30%,rgba(49,91,91,.19),transparent 38%),
-    radial-gradient(ellipse at 50% 100%,rgba(113,74,39,.15),transparent 40%),
-    linear-gradient(145deg,#10171b,#111820 48%,#171a1c);
+    radial-gradient(ellipse at 15% 10%,rgba(130,91,46,.2),transparent 38%),
+    radial-gradient(ellipse at 85% 35%,rgba(48,91,82,.17),transparent 40%),
+    linear-gradient(145deg,#10171b,#131a1d 55%,#191b1b);
   overflow-x:hidden;
 }
-
-body::before {
+body::after{
   content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  opacity:.16;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+  position:fixed;inset:0;pointer-events:none;z-index:-1;
+  opacity:.12;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.2'/%3E%3C/svg%3E");
 }
+.ambient{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
+.glow{position:absolute;width:440px;height:440px;border-radius:50%;filter:blur(110px);opacity:.14;animation:glow 17s ease-in-out infinite alternate}
+.glow.a{background:#bb8746;top:-200px;left:-120px}
+.glow.b{background:#477c72;right:-200px;top:35%;animation-delay:-7s}
+.glow.c{background:#9c7041;bottom:-250px;left:35%;animation-delay:-11s}
+@keyframes glow{to{transform:translate(80px,70px) scale(1.2)}}
+#snow{position:fixed;inset:0;pointer-events:none;z-index:4}
 
-.ambient {
-  position:fixed;
-  inset:0;
+/* INTRO: COMPLETELY WITHOUT TEXT */
+.intro{
+  position:fixed;inset:0;z-index:1000;
+  display:grid;place-items:center;
+  background:
+    radial-gradient(ellipse at center,rgba(143,102,49,.2),transparent 42%),
+    #0d1418;
+  transition:opacity 1.3s,visibility 1.3s;
   overflow:hidden;
-  pointer-events:none;
-  z-index:-1;
 }
-
-.glow {
-  position:absolute;
-  width:420px;
-  height:420px;
-  border-radius:50%;
-  filter:blur(100px);
-  opacity:.13;
-  animation:glowMove 16s ease-in-out infinite alternate;
+.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+.intro-scene{
+  width:260px;height:260px;position:relative;
+  display:grid;place-items:center;
+  animation:sceneEnter 1.4s cubic-bezier(.2,.8,.2,1) both;
 }
-
-.glow.one { background:#c18b43;top:-180px;left:-100px; }
-.glow.two { background:#477c77;right:-180px;top:25%;animation-delay:-5s; }
-.glow.three { background:#a47a45;bottom:-260px;left:35%;animation-delay:-9s; }
-
-@keyframes glowMove {
-  to { transform:translate(80px,65px) scale(1.2); }
+.core{
+  width:94px;height:94px;border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 25%,#fff7dc 0%,#e8ca87 10%,#a77b40 34%,#473923 64%,#10171b 78%);
+  box-shadow:0 0 30px #d6ad5b55,0 0 90px #d6ad5b44, inset -10px -12px 25px #0008;
+  animation:corePulse 3s ease-in-out infinite;
+  position:relative;z-index:3;
 }
-
-#snow {
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:5;
+.core::after{
+  content:"";position:absolute;inset:13px;border-radius:50%;
+  border:1px solid #fff1cf88;
+  box-shadow:0 0 20px #f0d18a55;
 }
-
-.topbar {
-  position:relative;
-  z-index:10;
-  max-width:1400px;
-  margin:auto;
-  padding:25px 5%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  opacity:0;
-  animation:fadeDown 1s .5s forwards;
+.ring{
+  position:absolute;border:1px solid #dfbd7b66;border-radius:50%;
+  transform:rotateX(68deg);
 }
-
-.brand {
-  display:flex;
-  align-items:center;
-  gap:12px;
-  color:var(--gold-light);
-  font-size:11px;
-  letter-spacing:3px;
-  text-transform:uppercase;
+.ring.one{width:180px;height:180px;animation:orbit 7s linear infinite}
+.ring.two{width:220px;height:220px;border-color:#d7c8a044;animation:orbit 11s linear infinite reverse}
+.ring.three{width:255px;height:255px;border-style:dashed;border-color:#e4c47a33;animation:orbit 18s linear infinite}
+.ring::after{
+  content:"";position:absolute;width:7px;height:7px;border-radius:50%;
+  background:#f3d797;box-shadow:0 0 15px 5px #e7c57c77;
+  top:50%;left:-4px;
 }
-
-.brand-mark {
-  width:29px;
-  height:29px;
-  border:1px solid rgba(216,184,117,.6);
-  transform:rotate(45deg);
-  position:relative;
+.orbital-light{
+  position:absolute;width:13px;height:13px;border-radius:50%;
+  background:#fff1c8;box-shadow:0 0 30px 10px #d6ae5c66;
+  animation:lightOrbit 5s linear infinite;
 }
-
-.brand-mark::after {
-  content:"";
-  position:absolute;
-  inset:7px;
-  border:1px solid var(--gold);
+.intro-flash{
+  position:absolute;width:350px;height:350px;border-radius:50%;
+  background:radial-gradient(circle,transparent 35%,#e8c77a12 60%,transparent 70%);
+  animation:flash 3s ease-in-out infinite;
 }
-
-.actions { display:flex;gap:10px; }
-
-.glass-button {
-  border:1px solid var(--line);
-  color:#e8dfcc;
-  background:rgba(255,255,255,.045);
-  padding:10px 15px;
-  border-radius:30px;
-  font:inherit;
-  font-size:11px;
-  letter-spacing:.5px;
-  cursor:pointer;
-  backdrop-filter:blur(14px);
+.intro-skip{
+  position:absolute;bottom:35px;
+  background:transparent;border:1px solid #ffffff22;
+  color:#aeb0a9;border-radius:30px;padding:10px 19px;
+  font:10px Manrope;letter-spacing:2px;cursor:pointer;
   transition:.3s;
 }
+.intro-skip:hover{border-color:#d8b875;color:#f4e4bd}
+@keyframes sceneEnter{from{opacity:0;transform:scale(.5) rotate(-25deg);filter:blur(12px)}to{opacity:1;transform:scale(1) rotate(0);filter:blur(0)}}
+@keyframes corePulse{50%{transform:scale(1.09);box-shadow:0 0 45px #d6ad5b88,0 0 110px #d6ad5b55}}
+@keyframes orbit{to{transform:rotateX(68deg) rotateZ(360deg)}}
+@keyframes lightOrbit{to{transform:rotate(360deg) translateX(112px) rotate(-360deg)}}
+@keyframes flash{50%{transform:scale(1.2);opacity:.5}}
 
-.glass-button:hover {
-  border-color:rgba(216,184,117,.6);
-  background:rgba(216,184,117,.1);
-  transform:translateY(-2px);
+/* HEADER */
+.topbar{
+  max-width:1400px;margin:auto;padding:25px 5%;
+  display:flex;justify-content:space-between;align-items:center;
+  opacity:0;animation:fadeDown 1s .5s forwards;
 }
+.brand{display:flex;align-items:center;gap:12px;color:var(--gold-light);font-size:10px;letter-spacing:3px;text-transform:uppercase}
+.brand-symbol{width:29px;height:29px;position:relative;display:grid;place-items:center}
+.brand-symbol::before{
+  content:"";position:absolute;width:17px;height:17px;
+  border:1px solid var(--gold);transform:rotate(45deg);
+}
+.brand-symbol::after{
+  content:"";position:absolute;width:7px;height:7px;
+  border:1px solid var(--gold-light);transform:rotate(45deg);
+  box-shadow:0 0 13px #d8b87577;
+}
+.actions{display:flex;gap:9px}
+.glass-button{
+  border:1px solid var(--line);color:#e8dfcc;
+  background:rgba(255,255,255,.045);padding:10px 15px;
+  border-radius:30px;font:11px Manrope;cursor:pointer;
+  backdrop-filter:blur(14px);transition:.3s;
+}
+.glass-button:hover{border-color:#d8b87588;background:#d8b87515;transform:translateY(-2px)}
 
-.hero {
-  text-align:center;
-  padding:70px 20px 55px;
-  max-width:850px;
-  margin:auto;
-  opacity:0;
+/* HERO */
+.hero{
+  text-align:center;padding:68px 20px 55px;
+  max-width:850px;margin:auto;opacity:0;
   animation:heroEnter 1.4s .2s cubic-bezier(.2,.8,.2,1) forwards;
 }
-
-.eyebrow {
-  color:var(--gold);
-  font-size:10px;
-  letter-spacing:5px;
-  text-transform:uppercase;
-  margin-bottom:22px;
-}
-
-.hero h1 {
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(58px,9vw,112px);
-  font-weight:500;
-  line-height:.9;
-  margin:0;
-  letter-spacing:-2px;
+.eyebrow{color:var(--gold);font-size:10px;letter-spacing:5px;margin-bottom:22px}
+.hero h1{
+  font:500 clamp(58px,9vw,112px)/.9 "Cormorant Garamond",serif;
+  letter-spacing:-2px;margin:0;
   background:linear-gradient(110deg,#a98248,#f6e4b4 42%,#c6a36c 70%,#f3dfaa);
-  background-size:200% auto;
-  color:transparent;
-  background-clip:text;
-  -webkit-background-clip:text;
-  animation:goldShimmer 8s linear infinite;
+  background-size:200% auto;color:transparent;
+  background-clip:text;-webkit-background-clip:text;
+  animation:shimmer 8s linear infinite;
 }
-
-@keyframes goldShimmer {
-  to { background-position:200% center; }
-}
-
-.hero-line {
-  width:100px;
-  height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  margin:27px auto;
-  transform:scaleX(0);
-  animation:lineReveal 1.2s 1s forwards;
-}
-
-.hero p {
-  color:#b8b8b0;
-  font-size:13px;
-  letter-spacing:1.5px;
-  font-weight:300;
-}
-
-.countdown {
-  display:flex;
-  justify-content:center;
-  gap:13px;
-  margin:38px 0 0;
-}
-
-.time-unit {
-  width:76px;
-  padding:13px 5px 10px;
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:12px;
-  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018));
+.hero-line{width:100px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:27px auto}
+.hero p{color:#b8b8b0;font-size:12px;letter-spacing:1.5px;font-weight:300}
+.countdown{display:flex;justify-content:center;gap:12px;margin:38px 0 0}
+.time-unit{
+  width:76px;padding:13px 5px 10px;border:1px solid #ffffff16;
+  border-radius:12px;background:linear-gradient(145deg,#ffffff0d,#ffffff04);
   backdrop-filter:blur(16px);
-  box-shadow:0 12px 35px rgba(0,0,0,.12);
 }
+.time-unit strong{display:block;color:var(--gold-light);font:500 29px "Cormorant Garamond"}
+.time-unit span{font-size:8px;color:#999b98;letter-spacing:2px;text-transform:uppercase}
 
-.time-unit strong {
-  display:block;
-  color:var(--gold-light);
-  font-family:"Cormorant Garamond",serif;
-  font-size:29px;
-  font-weight:500;
-}
-
-.time-unit span {
-  font-size:8px;
-  color:#999b98;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.calendar-section {
-  max-width:1250px;
-  margin:0 auto;
-  padding:15px 28px 90px;
-}
-
-.section-heading {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:25px;
-  padding:0 5px;
-}
-
-.section-heading h2 {
-  font-family:"Cormorant Garamond",serif;
-  font-size:27px;
-  font-weight:500;
-  color:#e9d9b7;
-  margin:0;
-}
-
-.section-heading span {
-  color:#92958f;
-  font-size:10px;
-  letter-spacing:1.5px;
-}
-
-.gift-grid {
-  display:grid;
-  grid-template-columns:repeat(6,minmax(0,1fr));
-  grid-auto-rows:150px;
-  gap:15px;
-  grid-auto-flow:dense;
-}
-
-.gift-card {
-  position:relative;
-  min-width:0;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:17px;
-  background:
-    linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.018));
-  box-shadow:0 15px 40px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.07);
-  backdrop-filter:blur(18px);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  cursor:pointer;
+/* CALENDAR */
+.calendar-section{max-width:1250px;margin:auto;padding:15px 28px 90px}
+.section-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:25px;padding:0 5px}
+.section-heading h2{font:500 27px "Cormorant Garamond";color:#e9d9b7;margin:0}
+.section-heading span{color:#92958f;font-size:10px;letter-spacing:1.5px}
+.gift-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-rows:150px;gap:15px;grid-auto-flow:dense}
+.gift-card{
+  --gift:#783a40;--ribbon:#d8b875;--paper:#a94c50;
+  position:relative;min-width:0;border:1px solid #ffffff19;
+  border-radius:17px;background:linear-gradient(145deg,#ffffff0e,#ffffff04);
+  box-shadow:0 15px 40px #0003,inset 0 1px #ffffff0c;
+  backdrop-filter:blur(18px);display:flex;align-items:center;justify-content:center;
+  overflow:hidden;cursor:pointer;
   transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s;
   animation:cardEnter .8s both;
 }
-
-.gift-card:nth-child(5n+2),
-.gift-card:nth-child(9n+6) {
-  grid-column:span 2;
-  grid-row:span 2;
-}
-
-.gift-card:hover {
-  transform:translateY(-6px) scale(1.015);
-  border-color:rgba(216,184,117,.48);
-  box-shadow:0 25px 55px rgba(0,0,0,.3),0 0 35px rgba(216,184,117,.08);
-}
-
-.gift-card::before {
-  content:"";
-  position:absolute;
-  width:180%;
-  height:180%;
-  left:-40%;
-  top:-40%;
-  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 55%);
-  opacity:0;
-  transition:.5s;
-}
-
-.gift-card:hover::before { opacity:1; }
-
-.gift-inner {
-  width:100%;
-  height:100%;
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:13px;
-}
-
-.present {
-  position:relative;
-  width:68px;
-  height:63px;
-  flex-shrink:0;
-  filter:drop-shadow(0 12px 14px rgba(0,0,0,.3));
-  transition:transform .5s cubic-bezier(.2,.8,.2,1);
-}
-
-.gift-card:hover .present {
-  transform:translateY(-5px) rotate(-3deg) scale(1.08);
-}
-
-.present .box {
-  position:absolute;
-  bottom:0;
-  left:5px;
-  width:58px;
-  height:43px;
-  border-radius:3px 3px 6px 6px;
-  background:var(--gift);
-  box-shadow:inset -8px 0 15px rgba(0,0,0,.16),inset 2px 0 10px rgba(255,255,255,.13);
-}
-
-.present .lid {
-  position:absolute;
-  left:1px;
-  top:13px;
-  width:66px;
-  height:13px;
-  border-radius:3px;
-  background:var(--gift-light);
-  box-shadow:0 3px 5px rgba(0,0,0,.2);
-}
-
-.present .ribbon-v {
-  position:absolute;
-  left:29px;
-  top:13px;
-  bottom:0;
-  width:10px;
-  background:var(--ribbon);
-  opacity:.94;
-}
-
-.present .ribbon-h {
-  position:absolute;
-  left:5px;
-  top:29px;
-  width:58px;
-  height:9px;
-  background:var(--ribbon);
-  opacity:.94;
-}
-
-.present .bow {
-  position:absolute;
-  top:0;
-  left:24px;
-  width:20px;
-  height:13px;
-}
-
-.present .bow::before,
-.present .bow::after {
-  content:"";
-  position:absolute;
-  width:13px;
-  height:9px;
-  border:3px solid var(--ribbon);
-  border-radius:80% 80% 20% 80%;
-}
-
-.present .bow::before { left:-8px;transform:rotate(25deg); }
-.present .bow::after { right:-8px;transform:scaleX(-1) rotate(25deg); }
-
-.gift-number {
-  font-family:"Cormorant Garamond",serif;
-  color:#e6d3ad;
-  font-size:20px;
-  line-height:1;
-}
-
-.gift-label {
-  color:#a9aaa4;
-  font-size:9px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-}
-
-.gift-card.opened {
-  border-color:rgba(216,184,117,.4);
-  background:linear-gradient(145deg,rgba(216,184,117,.11),rgba(255,255,255,.025));
-}
-
-.gift-card.opened .gift-label { color:#d8b875; }
-
-.gift-card.locked {
-  cursor:default;
-  opacity:.58;
-  filter:saturate(.55);
-}
-
-.gift-card.locked:hover { transform:none; }
-
-.gift-card.locked .present { filter:grayscale(.35); }
-
-.gift-card.today {
-  border-color:rgba(235,205,143,.75);
-  box-shadow:0 0 0 1px rgba(216,184,117,.12),0 0 35px rgba(216,184,117,.1);
-}
-
-.gift-card.today::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:inherit;
-  border:1px solid rgba(243,223,170,.2);
-  animation:pulse 2.5s infinite;
-  pointer-events:none;
-}
-
-@keyframes pulse {
-  50% { opacity:.2;transform:scale(.97); }
-}
-
-.footer {
-  text-align:center;
-  padding:25px 20px 40px;
-  color:#777d7b;
-  font-size:10px;
-  letter-spacing:2px;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-
-.footer-line {
-  width:45px;
-  height:1px;
-  background:var(--gold);
-  opacity:.6;
-  margin:0 auto 18px;
-}
-
-/* Intro */
-.intro {
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  background:
-    radial-gradient(ellipse at center,rgba(104,77,44,.22),transparent 55%),
-    #10171b;
-  transition:opacity 1s,visibility 1s;
-}
-
-.intro.hide {
-  opacity:0;
-  visibility:hidden;
-}
-
-.intro-content {
-  text-align:center;
-  animation:introRise 1.3s cubic-bezier(.2,.8,.2,1) both;
-}
-
-.intro-overline {
-  color:var(--gold);
-  font-size:9px;
-  letter-spacing:6px;
-  margin-bottom:23px;
-}
-
-.intro-title {
-  font-family:"Cormorant Garamond",serif;
-  font-size:clamp(55px,10vw,105px);
-  font-weight:500;
-  color:var(--gold-light);
-  letter-spacing:-2px;
-  text-shadow:0 0 50px rgba(216,184,117,.18);
-}
-
-.intro-rule {
-  height:1px;
-  width:0;
-  margin:20px auto;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  animation:ruleGrow 1.4s .6s forwards;
-}
-
-.intro-sub {
-  color:#a9aaa4;
-  font-size:11px;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  opacity:0;
-  animation:fadeUp 1s 1s forwards;
-}
-
-.intro-skip {
-  position:absolute;
-  bottom:35px;
-  background:transparent;
-  color:#888d89;
-  border:0;
-  font:inherit;
-  font-size:10px;
-  letter-spacing:2px;
-  cursor:pointer;
-}
-
-@keyframes introRise {
-  from { opacity:0;transform:translateY(35px) scale(.96);filter:blur(8px); }
-  to { opacity:1;transform:none;filter:blur(0); }
-}
-@keyframes ruleGrow { to { width:130px; } }
-@keyframes fadeUp { to { opacity:1; } }
-@keyframes fadeDown { to { opacity:1;transform:none; } }
-@keyframes heroEnter {
-  from { opacity:0;transform:translateY(35px);filter:blur(5px); }
-  to { opacity:1;transform:none;filter:blur(0); }
-}
-@keyframes lineReveal { to { transform:scaleX(1); } }
-@keyframes cardEnter {
-  from { opacity:0;transform:translateY(25px) scale(.97); }
-  to { opacity:1;transform:none; }
-}
-
-/* Modal */
-.modal {
-  position:fixed;
-  inset:0;
-  z-index:50;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(5,9,12,.82);
-  backdrop-filter:blur(18px);
-}
-
-.modal.show { display:flex;animation:modalIn .35s ease both; }
-
-@keyframes modalIn { from { opacity:0; } to { opacity:1; } }
-
-.modal-panel {
-  width:min(850px,100%);
-  border:1px solid rgba(216,184,117,.25);
-  border-radius:20px;
-  background:linear-gradient(145deg,rgba(35,42,43,.97),rgba(16,23,27,.98));
-  box-shadow:0 35px 100px rgba(0,0,0,.5);
+.gift-card:nth-child(5n+2),.gift-card:nth-child(9n+6){grid-column:span 2;grid-row:span 2}
+.gift-card:hover{transform:translateY(-6px) scale(1.015);border-color:#d8b87588;box-shadow:0 25px 55px #0005,0 0 35px #d8b87514}
+.gift-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:13px;position:relative}
+.present{position:relative;width:76px;height:72px;flex-shrink:0;transition:transform .5s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 12px 14px #0005)}
+.gift-card:hover .present{transform:translateY(-5px) rotate(-3deg) scale(1.08)}
+.box{
+  position:absolute;left:7px;bottom:0;width:62px;height:49px;
+  border-radius:3px 3px 6px 6px;background:var(--gift);
+  box-shadow:inset -10px 0 16px #0003,inset 3px 0 10px #ffffff20;
   overflow:hidden;
-  animation:panelIn .5s cubic-bezier(.2,.8,.2,1) both;
 }
+.lid{position:absolute;left:2px;top:14px;width:72px;height:14px;border-radius:3px;background:var(--paper);box-shadow:0 3px 6px #0004}
+.ribbon-v{position:absolute;left:34px;top:14px;bottom:0;width:10px;background:var(--ribbon)}
+.ribbon-h{position:absolute;left:7px;top:33px;width:62px;height:9px;background:var(--ribbon)}
+.bow{position:absolute;top:0;left:28px;width:20px;height:14px;z-index:2}
+.bow::before,.bow::after{content:"";position:absolute;width:14px;height:9px;border:3px solid var(--ribbon);border-radius:80% 80% 20% 80%}
+.bow::before{left:-8px;transform:rotate(25deg)}
+.bow::after{right:-8px;transform:scaleX(-1) rotate(25deg)}
 
-@keyframes panelIn {
-  from { transform:translateY(25px) scale(.97);opacity:0; }
-  to { transform:none;opacity:1; }
+/* INDIVIDUAL WRAPPING STYLES */
+.gift-card.style-1 .box::after{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(135deg,transparent 0 8px,#ffffff18 9px 10px);
 }
-
-.modal-top {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 23px;
-  border-bottom:1px solid rgba(255,255,255,.08);
+.gift-card.style-2 .ribbon-v{left:13px;width:12px}
+.gift-card.style-2 .ribbon-h{display:none}
+.gift-card.style-2 .bow{left:7px}
+.gift-card.style-3 .box{
+  background:repeating-linear-gradient(45deg,var(--gift) 0 7px,var(--paper) 8px 10px);
 }
-
-.modal-top small {
-  color:var(--gold);
-  letter-spacing:3px;
-  font-size:9px;
+.gift-card.style-3 .ribbon-v{display:none}
+.gift-card.style-4 .ribbon-v{left:19px;width:8px}
+.gift-card.style-4 .ribbon-h{transform:rotate(-18deg);top:34px}
+.gift-card.style-4 .bow{left:15px;transform:rotate(-18deg)}
+.gift-card.style-5 .box::after{
+  content:"";position:absolute;inset:5px;border:1px solid #ffffff42;border-radius:2px;
 }
-
-.close {
-  border:1px solid var(--line);
-  background:rgba(255,255,255,.05);
-  color:white;
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  cursor:pointer;
-  font-size:18px;
+.gift-card.style-5 .ribbon-h{height:5px;top:35px}
+.gift-card.style-5 .ribbon-v{width:6px;left:36px}
+.gift-card.style-6 .box{background:linear-gradient(135deg,var(--paper),var(--gift) 65%,#171b1b)}
+.gift-card.style-6 .lid{height:17px;top:11px}
+.gift-card.style-7 .ribbon-v{transform:rotate(20deg);left:33px;width:8px}
+.gift-card.style-7 .ribbon-h{transform:rotate(20deg)}
+.gift-card.style-8 .box::after{
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(circle at 12px 12px,#ffffff35 1px,transparent 2px);
+  background-size:12px 12px;
 }
+.gift-card.style-9 .lid{background:linear-gradient(90deg,#fff4d2,var(--paper),#fff4d2)}
+.gift-card.style-10 .ribbon-v{left:13px;width:8px}
+.gift-card.style-10 .ribbon-h{display:none}
+.gift-card.style-10 .bow{left:7px}
+.gift-card.style-11 .box{background:linear-gradient(110deg,var(--gift),var(--paper),var(--gift))}
+.gift-card.style-12 .ribbon-v{width:15px;left:32px}
+.gift-card.style-12 .ribbon-h{height:6px}
+.gift-number{font:500 20px "Cormorant Garamond";color:#e6d3ad;line-height:1}
+.gift-label{color:#a9aaa4;font-size:9px;letter-spacing:2px;text-transform:uppercase}
+.gift-card.opened{border-color:#d8b87566;background:linear-gradient(145deg,#d8b8751c,#ffffff05)}
+.gift-card.opened .gift-label{color:#d8b875}
+.gift-card.locked{cursor:default;opacity:.58;filter:saturate(.55)}
+.gift-card.locked:hover{transform:none}
+.gift-card.today{border-color:#ebcd8fbf;box-shadow:0 0 0 1px #d8b87520,0 0 35px #d8b87519}
+.gift-card.today::after{content:"";position:absolute;inset:0;border:1px solid #f3dfaa33;border-radius:inherit;animation:pulse 2.5s infinite;pointer-events:none}
+.footer{text-align:center;padding:25px 20px 40px;color:#777d7b;font-size:10px;letter-spacing:2px;border-top:1px solid #ffffff0e}
+.footer-line{width:45px;height:1px;background:var(--gold);opacity:.6;margin:0 auto 18px}
+.preview-label{position:fixed;bottom:15px;right:18px;z-index:8;padding:7px 11px;border:1px solid #d8b87540;border-radius:30px;background:#14191ab3;color:#c8ad79;font-size:8px;letter-spacing:2px;backdrop-filter:blur(12px)}
 
-.modal-body { padding:22px; }
+/* MODAL */
+.modal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:20px;background:#05090cd9;backdrop-filter:blur(18px)}
+.modal.show{display:flex;animation:fade .35s ease both}
+.modal-panel{width:min(850px,100%);border:1px solid #d8b87544;border-radius:20px;background:linear-gradient(145deg,#232a2bf7,#10171bfa);box-shadow:0 35px 100px #0008;overflow:hidden;animation:panelIn .5s cubic-bezier(.2,.8,.2,1) both}
+.modal-top{display:flex;justify-content:space-between;align-items:center;padding:20px 23px;border-bottom:1px solid #ffffff12}
+.modal-top small{color:var(--gold);letter-spacing:3px;font-size:9px}
+.close{border:1px solid var(--line);background:#ffffff0d;color:white;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:18px}
+.modal-body{padding:22px}
+.modal-title{font:500 35px "Cormorant Garamond";color:var(--gold-light);margin:0 0 7px}
+.modal-description{color:#aeb1aa;font-size:12px;line-height:1.8;margin:0 0 20px}
+.video-wrap{background:#050809;border:1px solid #ffffff19;border-radius:12px;overflow:hidden;min-height:150px;display:flex;align-items:center;justify-content:center}
+video{width:100%;max-height:65vh;display:block}
+.video-placeholder{text-align:center;padding:45px 15px;color:#aeb1aa;font-size:12px;line-height:2}
+.video-placeholder strong{display:block;font:500 27px "Cormorant Garamond";color:var(--gold-light)}
+.modal-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px}
+.modal-bottom span{color:#888e89;font-size:10px}
+.gold-button{padding:12px 18px;border:1px solid #d8b87599;border-radius:30px;background:linear-gradient(110deg,#9f7944,#d8b875);color:#171713;font:600 11px Manrope;cursor:pointer;transition:.3s}
+.gold-button:hover{filter:brightness(1.12);transform:translateY(-2px)}
 
-.modal-title {
-  font-family:"Cormorant Garamond",serif;
-  font-size:35px;
-  font-weight:500;
-  color:var(--gold-light);
-  margin:0 0 7px;
+/* GIFT OPEN ANIMATION */
+.opening-burst{position:fixed;inset:0;z-index:60;pointer-events:none;display:none;overflow:hidden}
+.opening-burst.active{display:block}
+.burst-particle{
+  position:absolute;width:5px;height:5px;border-radius:50%;
+  background:#f3d797;box-shadow:0 0 12px 3px #e9c77b88;
+  animation:burst 1.2s ease-out forwards;
 }
-
-.modal-description {
-  color:#aeb1aa;
-  font-size:12px;
-  line-height:1.8;
-  margin:0 0 20px;
+@keyframes burst{
+  from{transform:translate(0,0) scale(1);opacity:1}
+  to{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0}
 }
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes panelIn{from{transform:translateY(25px) scale(.97);opacity:0}to{transform:none;opacity:1}}
+@keyframes pulse{50%{opacity:.2;transform:scale(.97)}}
+@keyframes shimmer{to{background-position:200% center}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-15px)}to{opacity:1;transform:none}}
+@keyframes heroEnter{from{opacity:0;transform:translateY(35px);filter:blur(5px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes cardEnter{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:none}}
 
-.video-wrap {
-  background:#050809;
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:12px;
-  overflow:hidden;
-  min-height:150px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+@media(max-width:850px){
+  .gift-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:calc((100vw - 56px - 45px)/4);gap:12px}
+  .gift-card:nth-child(5n+2),.gift-card:nth-child(9n+6){grid-column:span 2;grid-row:span 2}
 }
-
-video {
-  width:100%;
-  max-height:65vh;
-  display:block;
+@media(max-width:520px){
+  .topbar{padding:19px 18px}
+  .brand{font-size:9px;letter-spacing:2px}
+  .glass-button{padding:9px 11px;font-size:9px}
+  .hero{padding:60px 15px 42px}
+  .hero h1{font-size:61px}
+  .hero p{font-size:10px;line-height:1.8}
+  .countdown{gap:7px}
+  .time-unit{width:66px;padding:10px 3px}
+  .time-unit strong{font-size:25px}
+  .calendar-section{padding:10px 14px 60px}
+  .gift-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:calc((100vw - 28px - 36px)/4);gap:9px}
+  .gift-card{border-radius:13px}
+  .present{transform:scale(.78);margin:-5px}
+  .gift-card:hover .present{transform:scale(.84) translateY(-3px)}
+  .gift-number{font-size:17px}
+  .gift-label{font-size:7px;letter-spacing:1.2px}
+  .section-heading h2{font-size:23px}
+  .section-heading span{font-size:8px}
+  .modal-body{padding:16px}
+  .modal-title{font-size:29px}
 }
-
-.video-placeholder {
-  text-align:center;
-  padding:45px 15px;
-  color:#aeb1aa;
-  font-size:12px;
-  line-height:2;
-}
-
-.video-placeholder strong {
-  display:block;
-  font-family:"Cormorant Garamond",serif;
-  font-size:27px;
-  font-weight:500;
-  color:var(--gold-light);
-}
-
-.modal-bottom {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-  margin-top:18px;
-}
-
-.modal-bottom span {
-  color:#888e89;
-  font-size:10px;
-}
-
-.gold-button {
-  padding:12px 18px;
-  border:1px solid rgba(216,184,117,.6);
-  border-radius:30px;
-  background:linear-gradient(110deg,#9f7944,#d8b875);
-  color:#171713;
-  font:inherit;
-  font-size:11px;
-  font-weight:600;
-  cursor:pointer;
-  transition:.3s;
-}
-
-.gold-button:hover { filter:brightness(1.12);transform:translateY(-2px); }
-
-.preview-label {
-  position:fixed;
-  bottom:15px;
-  right:18px;
-  z-index:8;
-  padding:7px 11px;
-  border:1px solid rgba(216,184,117,.25);
-  border-radius:30px;
-  background:rgba(20,25,26,.7);
-  color:#c8ad79;
-  font-size:8px;
-  letter-spacing:2px;
-  backdrop-filter:blur(12px);
-}
-
-@media(max-width:850px) {
-  .gift-grid {
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    grid-auto-rows:calc((100vw - 56px - 45px)/4);
-    gap:12px;
-  }
-  .gift-card:nth-child(5n+2),
-  .gift-card:nth-child(9n+6) {
-    grid-column:span 2;
-    grid-row:span 2;
-  }
-}
-
-@media(max-width:520px) {
-  .topbar { padding:19px 18px; }
-  .brand { font-size:9px;letter-spacing:2px; }
-  .glass-button { padding:9px 11px;font-size:9px; }
-  .hero { padding:60px 15px 42px; }
-  .hero h1 { font-size:61px; }
-  .hero p { font-size:10px;line-height:1.8; }
-  .countdown { gap:7px; }
-  .time-unit { width:66px;padding:10px 3px; }
-  .time-unit strong { font-size:25px; }
-  .calendar-section { padding:10px 14px 60px; }
-  .gift-grid {
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    grid-auto-rows:calc((100vw - 28px - 36px)/4);
-    gap:9px;
-  }
-  .gift-card { border-radius:13px; }
-  .present { transform:scale(.78);margin:-5px; }
-  .gift-card:hover .present { transform:scale(.84) translateY(-3px); }
-  .gift-number { font-size:17px; }
-  .gift-label { font-size:7px;letter-spacing:1.2px; }
-  .section-heading h2 { font-size:23px; }
-  .section-heading span { font-size:8px; }
-  .modal-body { padding:16px; }
-  .modal-title { font-size:29px; }
-}
-
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-    transition-duration:.01ms!important;
-  }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}
 }
 </style>
 </head>
 
 <body>
-
-<div class="ambient">
-  <div class="glow one"></div>
-  <div class="glow two"></div>
-  <div class="glow three"></div>
-</div>
-
+<div class="ambient"><div class="glow a"></div><div class="glow b"></div><div class="glow c"></div></div>
 <canvas id="snow"></canvas>
 
 <div class="intro" id="intro">
-  <div class="intro-content">
-    <div class="intro-overline">THE MOST WONDERFUL TIME OF THE YEAR</div>
-    <div class="intro-title">Christmas<br>Wonderland</div>
-    <div class="intro-rule"></div>
-    <div class="intro-sub">A little magic every day</div>
+  <div class="intro-scene">
+    <div class="intro-flash"></div>
+    <div class="ring one"></div>
+    <div class="ring two"></div>
+    <div class="ring three"></div>
+    <div class="orbital-light"></div>
+    <div class="core"></div>
   </div>
   <button class="intro-skip" onclick="closeIntro()">ÜBERSPRINGEN</button>
 </div>
 
 <header class="topbar">
   <div class="brand">
-    <div class="brand-mark"></div>
+    <div class="brand-symbol"></div>
     <span>Christmas Edition</span>
   </div>
   <div class="actions">
@@ -783,7 +345,6 @@ video {
     <h1>Christmas<br>Wonderland</h1>
     <div class="hero-line"></div>
     <p>24 DAYS. 24 SURPRISES. ONE MAGICAL SEASON.</p>
-
     <div class="countdown">
       <div class="time-unit"><strong id="days">00</strong><span>Tage</span></div>
       <div class="time-unit"><strong id="hours">00</strong><span>Stunden</span></div>
@@ -801,12 +362,9 @@ video {
   </section>
 </main>
 
-<footer class="footer">
-  <div class="footer-line"></div>
-  MADE WITH CARE · CHRISTMAS WONDERLAND 2026
-</footer>
-
+<footer class="footer"><div class="footer-line"></div>MADE WITH CARE · CHRISTMAS WONDERLAND 2026</footer>
 <div class="preview-label" id="previewLabel">PREVIEW MODE</div>
+<div class="opening-burst" id="openingBurst"></div>
 
 <div class="modal" id="modal" onclick="outsideClose(event)">
   <div class="modal-panel">
@@ -827,313 +385,231 @@ video {
 </div>
 
 <script>
-/* ================================
-   EINSTELLUNGEN
-================================ */
+/* EINSTELLUNGEN */
+const TEST_MODE=true;
+const YEAR=2026;
+const STORAGE_KEY="christmasWonderlandGlass2026";
 
-const TEST_MODE = true;
-const YEAR = 2026;
-
-// Hier später deine Videos eintragen.
-// Beispiel: video: "videos/tag1.mp4"
-
-const calendarData = [
-  {title:"Ein kleiner Auftakt",description:"Der Dezember beginnt. Zeit für eine kleine Überraschung.",video:""},
-  {title:"Winter Moments",description:"Ein besonderer Moment für deinen zweiten Dezember.",video:""},
-  {title:"Eine Überraschung",description:"Hinter diesem Türchen wartet etwas auf dich.",video:""},
-  {title:"A Little Magic",description:"Ein bisschen Weihnachtszauber für deinen Tag.",video:""},
-  {title:"Winter Wonderland",description:"Mach es dir gemütlich und genieße den Moment.",video:""},
-  {title:"The Golden Day",description:"Ein goldener Moment im Advent.",video:""},
-  {title:"A Special Day",description:"Eine weitere kleine Überraschung wartet.",video:""},
-  {title:"Cozy Moments",description:"Zeit für Gemütlichkeit.",video:""},
-  {title:"December Dreams",description:"Ein besonderer Tag im Dezember.",video:""},
-  {title:"The Tenth Gift",description:"Das zehnte Türchen ist für dich.",video:""},
-  {title:"Golden Lights",description:"Lichter, Wärme und ein bisschen Magie.",video:""},
-  {title:"Almost Christmas",description:"Die Vorfreude steigt.",video:""},
-  {title:"A Winter Story",description:"Ein weiterer Teil deiner Weihnachtsgeschichte.",video:""},
-  {title:"The Fourteenth Gift",description:"Eine kleine Überraschung wartet.",video:""},
-  {title:"Winter Glow",description:"Ein Moment voller winterlicher Stimmung.",video:""},
-  {title:"A Little Wonder",description:"Lass dich überraschen.",video:""},
-  {title:"Christmas Feeling",description:"Weihnachten rückt näher.",video:""},
-  {title:"The Eighteenth Gift",description:"Ein besonderer Moment für dich.",video:""},
-  {title:"Festive Moments",description:"Die festliche Zeit ist da.",video:""},
-  {title:"Four Days to Go",description:"Nur noch wenige Tage bis Weihnachten.",video:""},
-  {title:"The Final Countdown",description:"Die Spannung steigt.",video:""},
-  {title:"Almost There",description:"Morgen ist Heiligabend.",video:""},
-  {title:"Christmas Eve Eve",description:"Nur noch ein Tag.",video:""},
-  {title:"Merry Christmas",description:"Frohe Weihnachten und eine wundervolle Zeit!",video:""}
+const calendarData=[
+ {title:"Ein kleiner Auftakt",description:"Der Dezember beginnt. Zeit für eine kleine Überraschung.",video:""},
+ {title:"Winter Moments",description:"Ein besonderer Moment für deinen zweiten Dezember.",video:""},
+ {title:"Eine Überraschung",description:"Hinter diesem Türchen wartet etwas auf dich.",video:""},
+ {title:"A Little Magic",description:"Ein bisschen Weihnachtszauber für deinen Tag.",video:""},
+ {title:"Winter Wonderland",description:"Mach es dir gemütlich und genieße den Moment.",video:""},
+ {title:"The Golden Day",description:"Ein goldener Moment im Advent.",video:""},
+ {title:"A Special Day",description:"Eine weitere kleine Überraschung wartet.",video:""},
+ {title:"Cozy Moments",description:"Zeit für Gemütlichkeit.",video:""},
+ {title:"December Dreams",description:"Ein besonderer Tag im Dezember.",video:""},
+ {title:"The Tenth Gift",description:"Das zehnte Türchen ist für dich.",video:""},
+ {title:"Golden Lights",description:"Lichter, Wärme und ein bisschen Magie.",video:""},
+ {title:"Almost Christmas",description:"Die Vorfreude steigt.",video:""},
+ {title:"A Winter Story",description:"Ein weiterer Teil deiner Weihnachtsgeschichte.",video:""},
+ {title:"The Fourteenth Gift",description:"Eine kleine Überraschung wartet.",video:""},
+ {title:"Winter Glow",description:"Ein Moment voller winterlicher Stimmung.",video:""},
+ {title:"A Little Wonder",description:"Lass dich überraschen.",video:""},
+ {title:"Christmas Feeling",description:"Weihnachten rückt näher.",video:""},
+ {title:"The Eighteenth Gift",description:"Ein besonderer Moment für dich.",video:""},
+ {title:"Festive Moments",description:"Die festliche Zeit ist da.",video:""},
+ {title:"Four Days to Go",description:"Nur noch wenige Tage bis Weihnachten.",video:""},
+ {title:"The Final Countdown",description:"Die Spannung steigt.",video:""},
+ {title:"Almost There",description:"Morgen ist Heiligabend.",video:""},
+ {title:"Christmas Eve Eve",description:"Nur noch ein Tag.",video:""},
+ {title:"Merry Christmas",description:"Frohe Weihnachten und eine wundervolle Zeit!",video:""}
 ];
 
-const giftColors = [
-  ["#7f3439","#a94c50","#d8b875"],
-  ["#254c48","#3d7467","#d8b875"],
-  ["#78613b","#a58a54","#e4d0a0"],
-  ["#343f58","#526985","#c6b27e"],
-  ["#6c3944","#9b5360","#e0c28b"],
-  ["#40594b","#66816a","#d4bd86"]
+const giftColors=[
+ ["#78343b","#a94c50","#d8b875"],
+ ["#254c48","#3d7467","#e4d0a0"],
+ ["#78613b","#a58a54","#f0d99d"],
+ ["#343f58","#526985","#c6b27e"],
+ ["#6c3944","#9b5360","#e0c28b"],
+ ["#40594b","#66816a","#d4bd86"],
+ ["#453c55","#77658a","#d6bd8d"],
+ ["#7b5535","#ae8150","#e6d6b1"],
+ ["#304754","#527d8b","#e1c78e"],
+ ["#573d32","#8a6651","#e3c68e"],
+ ["#4a4c40","#7b8063","#d9c58e"],
+ ["#583c4b","#96677c","#e8d3ad"]
 ];
 
-const STORAGE_KEY = "christmasWonderlandGlass2026";
-let watched = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-let activeDay = null;
-let soundEnabled = false;
-let audioContext = null;
+let watched=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]");
+let activeDay=null;
+let soundEnabled=false;
+let audioContext=null;
 
-/* ================================
-   INTRO
-================================ */
+function closeIntro(){document.getElementById("intro").classList.add("hide")}
+setTimeout(closeIntro,3900);
 
-function closeIntro() {
-  document.getElementById("intro").classList.add("hide");
+/* COUNTDOWN */
+function updateCountdown(){
+ const target=new Date(YEAR,11,24,0,0,0);
+ let diff=Math.max(0,target-new Date());
+ document.getElementById("days").textContent=String(Math.floor(diff/86400000)).padStart(2,"0");
+ document.getElementById("hours").textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,"0");
+ document.getElementById("minutes").textContent=String(Math.floor(diff%3600000/60000)).padStart(2,"0");
+ document.getElementById("seconds").textContent=String(Math.floor(diff%60000/1000)).padStart(2,"0");
+}
+updateCountdown();setInterval(updateCountdown,1000);
+
+/* GIFTS */
+function canOpen(day){
+ if(TEST_MODE)return true;
+ const n=new Date();
+ return n.getFullYear()===YEAR&&n.getMonth()===11&&n.getDate()>=day;
 }
 
-setTimeout(closeIntro, 3800);
+function renderGifts(){
+ const grid=document.getElementById("giftGrid");
+ grid.innerHTML="";
+ calendarData.forEach((gift,index)=>{
+  const day=index+1,colors=giftColors[index%giftColors.length];
+  const available=canOpen(day),isWatched=watched.includes(day);
+  const card=document.createElement("div");
+  card.className=`gift-card style-${(index%12)+1}`;
+  if(isWatched)card.classList.add("opened");
+  if(!available)card.classList.add("locked");
+  const now=new Date();
+  if(now.getFullYear()===YEAR&&now.getMonth()===11&&now.getDate()===day)card.classList.add("today");
 
-/* ================================
-   COUNTDOWN
-================================ */
+  card.style.animationDelay=(index*.045)+"s";
+  card.style.setProperty("--gift",colors[0]);
+  card.style.setProperty("--paper",colors[1]);
+  card.style.setProperty("--ribbon",colors[2]);
 
-function updateCountdown() {
-  const target = new Date(YEAR,11,24,0,0,0);
-  const now = new Date();
-  let diff = Math.max(0,target-now);
-
-  const d = Math.floor(diff/86400000);
-  const h = Math.floor(diff%86400000/3600000);
-  const m = Math.floor(diff%3600000/60000);
-  const s = Math.floor(diff%60000/1000);
-
-  document.getElementById("days").textContent=String(d).padStart(2,"0");
-  document.getElementById("hours").textContent=String(h).padStart(2,"0");
-  document.getElementById("minutes").textContent=String(m).padStart(2,"0");
-  document.getElementById("seconds").textContent=String(s).padStart(2,"0");
+  card.innerHTML=`
+   <div class="gift-inner">
+    <div class="present">
+     <div class="bow"></div><div class="lid"></div>
+     <div class="box"></div><div class="ribbon-v"></div><div class="ribbon-h"></div>
+    </div>
+    <div class="gift-number">${String(day).padStart(2,"0")}</div>
+    <div class="gift-label">${isWatched?"ANGesehen".toUpperCase():available?"ÖFFNEN":"VERSCHLOSSEN"}</div>
+   </div>`;
+  card.addEventListener("click",()=>{if(available)openGift(day,card)});
+  grid.appendChild(card);
+ });
 }
-
-updateCountdown();
-setInterval(updateCountdown,1000);
-
-/* ================================
-   GESCHENKE
-================================ */
-
-function canOpen(day) {
-  if(TEST_MODE) return true;
-  const now = new Date();
-  return now.getFullYear()===YEAR &&
-         now.getMonth()===11 &&
-         now.getDate()>=day;
-}
-
-function renderGifts() {
-  const grid=document.getElementById("giftGrid");
-  grid.innerHTML="";
-
-  calendarData.forEach((gift,index)=>{
-    const day=index+1;
-    const colors=giftColors[index%giftColors.length];
-    const available=canOpen(day);
-    const isWatched=watched.includes(day);
-
-    const card=document.createElement("div");
-    card.className="gift-card";
-    if(isWatched) card.classList.add("opened");
-    if(!available) card.classList.add("locked");
-
-    const today=new Date();
-    if(today.getFullYear()===YEAR &&
-       today.getMonth()===11 &&
-       today.getDate()===day) card.classList.add("today");
-
-    card.style.animationDelay=(index*.045)+"s";
-    card.style.setProperty("--gift",colors[0]);
-    card.style.setProperty("--gift-light",colors[1]);
-    card.style.setProperty("--ribbon",colors[2]);
-
-    card.innerHTML=`
-      <div class="gift-inner">
-        <div class="present">
-          <div class="bow"></div>
-          <div class="lid"></div>
-          <div class="box"></div>
-          <div class="ribbon-v"></div>
-          <div class="ribbon-h"></div>
-        </div>
-        <div class="gift-number">${String(day).padStart(2,"0")}</div>
-        <div class="gift-label">${isWatched?"ANGesehen".toUpperCase():available?"ÖFFNEN":"VERSCHLOSSEN"}</div>
-      </div>
-    `;
-
-    card.addEventListener("click",()=>{
-      if(!available) return;
-      openGift(day);
-    });
-
-    grid.appendChild(card);
-  });
-}
-
 renderGifts();
 
-/* ================================
-   GESCHENK ÖFFNEN
-================================ */
-
-function openGift(day) {
-  activeDay=day;
-  const gift=calendarData[day-1];
-
-  document.getElementById("modalDay").textContent=
-    "DECEMBER · "+String(day).padStart(2,"0");
-  document.getElementById("modalTitle").textContent=gift.title;
-  document.getElementById("modalDescription").textContent=gift.description;
-  document.getElementById("modalStatus").textContent=
-    watched.includes(day)?"Bereits angesehen":"Ein besonderer Moment wartet auf dich.";
-
-  const wrap=document.getElementById("videoWrap");
-  wrap.innerHTML="";
-
-  if(gift.video.trim()) {
-    const video=document.createElement("video");
-    video.src=gift.video;
-    video.controls=true;
-    video.playsInline=true;
-    video.preload="metadata";
-    wrap.appendChild(video);
-  } else {
-    const placeholder=document.createElement("div");
-    placeholder.className="video-placeholder";
-    placeholder.innerHTML="<strong>Ein Moment für dich</strong>Hier kannst du später dein Video oder deine Überraschung einfügen.";
-    wrap.appendChild(placeholder);
-  }
-
-  document.getElementById("modal").classList.add("show");
-  document.body.style.overflow="hidden";
-  playChime();
+/* GOLD PARTICLES */
+function burstParticles(){
+ const burst=document.getElementById("openingBurst");
+ burst.innerHTML="";burst.classList.add("active");
+ for(let i=0;i<55;i++){
+  const p=document.createElement("i");
+  p.className="burst-particle";
+  p.style.left="50%";p.style.top="50%";
+  const angle=Math.random()*Math.PI*2;
+  const distance=90+Math.random()*280;
+  p.style.setProperty("--dx",Math.cos(angle)*distance+"px");
+  p.style.setProperty("--dy",Math.sin(angle)*distance+"px");
+  p.style.animationDelay=Math.random()*.2+"s";
+  burst.appendChild(p);
+ }
+ setTimeout(()=>burst.classList.remove("active"),1500);
 }
 
-function closeModal() {
-  const video=document.querySelector("#videoWrap video");
-  if(video) video.pause();
-  document.getElementById("modal").classList.remove("show");
-  document.body.style.overflow="";
+/* OPEN GIFT */
+function openGift(day,card){
+ activeDay=day;
+ burstParticles();
+ const gift=calendarData[day-1];
+ document.getElementById("modalDay").textContent="DECEMBER · "+String(day).padStart(2,"0");
+ document.getElementById("modalTitle").textContent=gift.title;
+ document.getElementById("modalDescription").textContent=gift.description;
+ document.getElementById("modalStatus").textContent=watched.includes(day)?"Bereits angesehen":"Ein besonderer Moment wartet auf dich.";
+
+ const wrap=document.getElementById("videoWrap");
+ wrap.innerHTML="";
+ if(gift.video.trim()){
+  const video=document.createElement("video");
+  video.src=gift.video;video.controls=true;video.playsInline=true;video.preload="metadata";
+  wrap.appendChild(video);
+ }else{
+  const placeholder=document.createElement("div");
+  placeholder.className="video-placeholder";
+  const title=document.createElement("strong");
+  title.textContent="Ein Moment für dich";
+  const desc=document.createElement("span");
+  desc.textContent="Hier kannst du später dein Video oder deine Überraschung einfügen.";
+  placeholder.append(title,desc);wrap.appendChild(placeholder);
+ }
+ document.getElementById("modal").classList.add("show");
+ document.body.style.overflow="hidden";
+ playChime();
 }
-
-function outsideClose(event) {
-  if(event.target.id==="modal") closeModal();
+function closeModal(){
+ const video=document.querySelector("#videoWrap video");
+ if(video)video.pause();
+ document.getElementById("modal").classList.remove("show");
+ document.body.style.overflow="";
 }
-
-function markWatched() {
-  if(!activeDay) return;
-  if(!watched.includes(activeDay)) watched.push(activeDay);
-  localStorage.setItem(STORAGE_KEY,JSON.stringify(watched));
-  document.getElementById("modalStatus").textContent="Als angesehen gespeichert.";
-  renderGifts();
+function outsideClose(e){if(e.target.id==="modal")closeModal()}
+function markWatched(){
+ if(!activeDay)return;
+ if(!watched.includes(activeDay))watched.push(activeDay);
+ localStorage.setItem(STORAGE_KEY,JSON.stringify(watched));
+ document.getElementById("modalStatus").textContent="Als angesehen gespeichert.";
+ renderGifts();
 }
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();closeIntro()}});
 
-document.addEventListener("keydown",event=>{
-  if(event.key==="Escape") {
-    closeModal();
-    closeIntro();
-  }
-});
-
-/* ================================
-   SOUND
-================================ */
-
-function toggleSound() {
-  soundEnabled=!soundEnabled;
-  document.getElementById("soundButton").textContent=
-    "Sound: "+(soundEnabled?"An":"Aus");
-
-  if(soundEnabled) {
-    playChime();
-  }
+/* SOUND */
+function toggleSound(){
+ soundEnabled=!soundEnabled;
+ document.getElementById("soundButton").textContent="Sound: "+(soundEnabled?"An":"Aus");
+ if(soundEnabled)playChime();
 }
-
-function playChime() {
-  if(!soundEnabled) return;
-  try {
-    audioContext=audioContext||new (window.AudioContext||window.webkitAudioContext)();
-    [523.25,659.25,783.99].forEach((frequency,index)=>{
-      const oscillator=audioContext.createOscillator();
-      const gain=audioContext.createGain();
-      oscillator.type="sine";
-      oscillator.frequency.value=frequency;
-      gain.gain.setValueAtTime(.0001,audioContext.currentTime+index*.13);
-      gain.gain.exponentialRampToValueAtTime(.07,audioContext.currentTime+index*.13+.03);
-      gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+index*.13+.45);
-      oscillator.connect(gain);
-      gain.connect(audioContext.destination);
-      oscillator.start(audioContext.currentTime+index*.13);
-      oscillator.stop(audioContext.currentTime+index*.13+.5);
-    });
-  } catch(e) {}
-}
-
-/* ================================
-   VOLLBILD
-================================ */
-
-function toggleFullscreen() {
-  if(!document.fullscreenElement) {
-    document.documentElement.requestFullscreen?.();
-  } else {
-    document.exitFullscreen?.();
-  }
-}
-
-/* ================================
-   SCHNEEFALL
-================================ */
-
-const canvas=document.getElementById("snow");
-const ctx=canvas.getContext("2d");
-let flakes=[];
-
-function resizeSnow() {
-  canvas.width=window.innerWidth*devicePixelRatio;
-  canvas.height=window.innerHeight*devicePixelRatio;
-  canvas.style.width=window.innerWidth+"px";
-  canvas.style.height=window.innerHeight+"px";
-  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
-
-  flakes=Array.from({length:Math.min(100,Math.floor(window.innerWidth/10))},()=>({
-    x:Math.random()*window.innerWidth,
-    y:Math.random()*window.innerHeight,
-    r:Math.random()*2+0.5,
-    speed:Math.random()*.65+.2,
-    drift:Math.random()*.5-.25,
-    opacity:Math.random()*.5+.15
-  }));
-}
-
-function drawSnow() {
-  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
-
-  flakes.forEach(f=>{
-    ctx.beginPath();
-    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
-    ctx.fillStyle=`rgba(238,235,222,${f.opacity})`;
-    ctx.fill();
-
-    f.y+=f.speed;
-    f.x+=f.drift;
-
-    if(f.y>window.innerHeight+5) {
-      f.y=-5;
-      f.x=Math.random()*window.innerWidth;
-    }
-    if(f.x>window.innerWidth+5) f.x=-5;
-    if(f.x<-5) f.x=window.innerWidth+5;
+function playChime(){
+ if(!soundEnabled)return;
+ try{
+  audioContext=audioContext||new(window.AudioContext||window.webkitAudioContext)();
+  [523.25,659.25,783.99].forEach((f,i)=>{
+   const o=audioContext.createOscillator(),g=audioContext.createGain();
+   o.type="sine";o.frequency.value=f;
+   g.gain.setValueAtTime(.0001,audioContext.currentTime+i*.13);
+   g.gain.exponentialRampToValueAtTime(.07,audioContext.currentTime+i*.13+.03);
+   g.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+i*.13+.45);
+   o.connect(g);g.connect(audioContext.destination);
+   o.start(audioContext.currentTime+i*.13);o.stop(audioContext.currentTime+i*.13+.5);
   });
-
-  requestAnimationFrame(drawSnow);
+ }catch(e){}
 }
 
+/* FULLSCREEN */
+function toggleFullscreen(){
+ if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();
+ else document.exitFullscreen?.();
+}
+
+/* SNOW */
+const canvas=document.getElementById("snow"),ctx=canvas.getContext("2d");
+let flakes=[];
+function resizeSnow(){
+ const dpr=window.devicePixelRatio||1;
+ canvas.width=innerWidth*dpr;canvas.height=innerHeight*dpr;
+ canvas.style.width=innerWidth+"px";canvas.style.height=innerHeight+"px";
+ ctx.setTransform(dpr,0,0,dpr,0,0);
+ flakes=Array.from({length:Math.min(100,Math.floor(innerWidth/10))},()=>({
+  x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+  r:Math.random()*2+.5,speed:Math.random()*.65+.2,
+  drift:Math.random()*.5-.25,opacity:Math.random()*.5+.15
+ }));
+}
+function drawSnow(){
+ ctx.clearRect(0,0,innerWidth,innerHeight);
+ flakes.forEach(f=>{
+  ctx.beginPath();ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+  ctx.fillStyle=`rgba(238,235,222,${f.opacity})`;ctx.fill();
+  f.y+=f.speed;f.x+=f.drift;
+  if(f.y>innerHeight+5){f.y=-5;f.x=Math.random()*innerWidth}
+  if(f.x>innerWidth+5)f.x=-5;
+  if(f.x<-5)f.x=innerWidth+5;
+ });
+ requestAnimationFrame(drawSnow);
+}
 window.addEventListener("resize",resizeSnow);
-resizeSnow();
-drawSnow();
+resizeSnow();drawSnow();
 </script>
 </body>
 </html>
