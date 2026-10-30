@@ -4,1175 +4,1136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090e19">
 <title>Christmas Wonderland</title>
+<meta name="theme-color" content="#10151b">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --bg:#090e19;
-  --gold:#d8b779;
-  --gold-light:#f7e6bd;
-  --gold-dark:#9c7540;
-  --glass:rgba(255,255,255,.055);
-  --glass-border:rgba(255,255,255,.12);
-  --text:#f5f0e7;
-  --muted:#9da7b8;
-  --green:#294c40;
-  --red:#803c43;
+:root {
+  --gold: #d8b875;
+  --gold-light: #f3dfaa;
+  --text: #f4f0e8;
+  --muted: #a9a9a5;
+  --glass: rgba(255,255,255,.055);
+  --line: rgba(255,255,255,.11);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
   margin:0;
-  background:var(--bg);
+  min-height:100vh;
   color:var(--text);
-  font-family:'DM Sans',sans-serif;
+  font-family:Manrope,sans-serif;
+  background:
+    radial-gradient(ellipse at 15% 12%,rgba(116,83,45,.22),transparent 36%),
+    radial-gradient(ellipse at 85% 30%,rgba(49,91,91,.19),transparent 38%),
+    radial-gradient(ellipse at 50% 100%,rgba(113,74,39,.15),transparent 40%),
+    linear-gradient(145deg,#10171b,#111820 48%,#171a1c);
   overflow-x:hidden;
 }
-button{font:inherit}
-button:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
-::selection{background:#d8b779;color:#111}
 
-/* BACKGROUND */
-.background{
+body::before {
+  content:"";
   position:fixed;
   inset:0;
-  z-index:-10;
-  overflow:hidden;
-  background:
-    radial-gradient(ellipse at 50% -10%,#33405a 0%,transparent 55%),
-    radial-gradient(ellipse at 12% 65%,#283a36 0%,transparent 45%),
-    radial-gradient(ellipse at 90% 85%,#49332a 0%,transparent 38%),
-    linear-gradient(180deg,#111b2c 0%,#0a111e 55%,#080d17 100%);
-}
-.aurora{
-  position:absolute;
-  width:1000px;height:550px;
-  top:-280px;left:50%;
-  transform:translateX(-50%) rotate(-12deg);
-  background:linear-gradient(100deg,transparent,#7a9b8a22,#a2a1c322,transparent);
-  filter:blur(75px);
-  animation:auroraMove 18s ease-in-out infinite alternate;
-}
-@keyframes auroraMove{
-  to{transform:translateX(-42%) rotate(12deg) scale(1.2)}
-}
-.warm-light{
-  position:absolute;
-  width:500px;height:500px;
-  border-radius:50%;
-  filter:blur(90px);
+  pointer-events:none;
+  z-index:-1;
   opacity:.16;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+}
+
+.ambient {
+  position:fixed;
+  inset:0;
+  overflow:hidden;
   pointer-events:none;
-}
-.warm-light.one{background:#d69c51;top:5%;left:-280px}
-.warm-light.two{background:#d5a15e;top:48%;right:-330px}
-.warm-light.three{background:#c4a66e;bottom:-380px;left:25%}
-.vignette{
-  position:absolute;inset:0;
-  background:radial-gradient(ellipse at center,transparent 35%,#03071185 100%);
-}
-#snow{
-  position:fixed;inset:0;
-  width:100%;height:100%;
-  pointer-events:none;z-index:5;
+  z-index:-1;
 }
 
-/* WARM LIGHTS */
-.lights{
-  position:absolute;top:0;left:0;right:0;
-  height:85px;opacity:.7;
-  display:flex;justify-content:space-around;
+.glow {
+  position:absolute;
+  width:420px;
+  height:420px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.13;
+  animation:glowMove 16s ease-in-out infinite alternate;
+}
+
+.glow.one { background:#c18b43;top:-180px;left:-100px; }
+.glow.two { background:#477c77;right:-180px;top:25%;animation-delay:-5s; }
+.glow.three { background:#a47a45;bottom:-260px;left:35%;animation-delay:-9s; }
+
+@keyframes glowMove {
+  to { transform:translate(80px,65px) scale(1.2); }
+}
+
+#snow {
+  position:fixed;
+  inset:0;
   pointer-events:none;
-}
-.light{
-  position:relative;width:7px;height:7px;
-  border-radius:50%;background:#f4dba5;
-  box-shadow:0 0 8px 3px #e7bc6c88,0 0 25px 8px #e7bc6c33;
-  animation:lightGlow 3s ease-in-out infinite alternate;
-}
-.light:after{
-  content:"";position:absolute;left:3px;top:-85px;
-  height:85px;width:1px;background:#c1a87955;
-}
-.light:nth-child(3n){animation-delay:-1s}
-.light:nth-child(4n){animation-delay:-2s}
-@keyframes lightGlow{
-  from{opacity:.4;box-shadow:0 0 5px 2px #e7bc6c55}
-  to{opacity:1;box-shadow:0 0 12px 5px #e7bc6c99,0 0 30px 10px #e7bc6c33}
+  z-index:5;
 }
 
-/* INTRO */
-.intro{
-  position:fixed;inset:0;z-index:100;
-  display:flex;align-items:center;justify-content:center;
-  background:
-    radial-gradient(ellipse at center,#263b3a 0%,#111b29 55%,#080d17 100%);
-  transition:opacity 1s,visibility 1s;
-}
-.intro.hide{opacity:0;visibility:hidden;pointer-events:none}
-.intro-content{
-  text-align:center;
-  width:90%;
-  animation:introContent 1.2s ease both;
-}
-.intro-small{
-  color:#d5bc8b;
-  font-size:10px;
-  letter-spacing:6px;
-  text-transform:uppercase;
-  opacity:0;
-  animation:fadeUp .9s .3s forwards;
-}
-.intro-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(60px,11vw,115px);
-  font-weight:600;
-  line-height:.95;
-  margin:25px 0;
-  background:linear-gradient(110deg,#9f7844,#f8e8c1,#c9a568,#fff0cc);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  text-shadow:0 0 40px #d4b16c22;
-  animation:goldShimmer 4s linear infinite,fadeUp 1.2s .5s both;
-  opacity:0;
-}
-.intro-line{
-  width:0;height:1px;
-  background:linear-gradient(90deg,transparent,#e7c98e,transparent);
-  margin:0 auto;
-  animation:lineGrow 1s 1s forwards;
-}
-.intro-caption{
-  margin-top:24px;
-  font-size:10px;letter-spacing:4px;
-  color:#c1c5c5;
-  opacity:0;
-  animation:fadeUp .8s 1.2s forwards;
-}
-.intro-skip{
-  position:absolute;bottom:35px;left:50%;
-  transform:translateX(-50%);
-  color:#b5b5ae;background:none;
-  border:1px solid #ffffff25;
-  padding:10px 18px;border-radius:30px;
-  font-size:10px;letter-spacing:2px;
-  cursor:pointer;
-}
-.intro-skip:hover{border-color:var(--gold);color:var(--gold)}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(15px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes lineGrow{to{width:min(280px,65vw)}}
-@keyframes goldShimmer{
-  to{background-position:200% center}
-}
-@keyframes introContent{
-  from{transform:scale(.96)}
-  to{transform:scale(1)}
-}
-
-/* HEADER */
-header{
-  width:min(1250px,calc(100% - 48px));
+.topbar {
+  position:relative;
+  z-index:10;
+  max-width:1400px;
   margin:auto;
-  height:82px;
+  padding:25px 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  opacity:0;
+  animation:fadeDown 1s .5s forwards;
+}
+
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:var(--gold-light);
+  font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.brand-mark {
+  width:29px;
+  height:29px;
+  border:1px solid rgba(216,184,117,.6);
+  transform:rotate(45deg);
+  position:relative;
+}
+
+.brand-mark::after {
+  content:"";
+  position:absolute;
+  inset:7px;
+  border:1px solid var(--gold);
+}
+
+.actions { display:flex;gap:10px; }
+
+.glass-button {
+  border:1px solid var(--line);
+  color:#e8dfcc;
+  background:rgba(255,255,255,.045);
+  padding:10px 15px;
+  border-radius:30px;
+  font:inherit;
+  font-size:11px;
+  letter-spacing:.5px;
+  cursor:pointer;
+  backdrop-filter:blur(14px);
+  transition:.3s;
+}
+
+.glass-button:hover {
+  border-color:rgba(216,184,117,.6);
+  background:rgba(216,184,117,.1);
+  transform:translateY(-2px);
+}
+
+.hero {
+  text-align:center;
+  padding:70px 20px 55px;
+  max-width:850px;
+  margin:auto;
+  opacity:0;
+  animation:heroEnter 1.4s .2s cubic-bezier(.2,.8,.2,1) forwards;
+}
+
+.eyebrow {
+  color:var(--gold);
+  font-size:10px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+
+.hero h1 {
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(58px,9vw,112px);
+  font-weight:500;
+  line-height:.9;
+  margin:0;
+  letter-spacing:-2px;
+  background:linear-gradient(110deg,#a98248,#f6e4b4 42%,#c6a36c 70%,#f3dfaa);
+  background-size:200% auto;
+  color:transparent;
+  background-clip:text;
+  -webkit-background-clip:text;
+  animation:goldShimmer 8s linear infinite;
+}
+
+@keyframes goldShimmer {
+  to { background-position:200% center; }
+}
+
+.hero-line {
+  width:100px;
+  height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:27px auto;
+  transform:scaleX(0);
+  animation:lineReveal 1.2s 1s forwards;
+}
+
+.hero p {
+  color:#b8b8b0;
+  font-size:13px;
+  letter-spacing:1.5px;
+  font-weight:300;
+}
+
+.countdown {
+  display:flex;
+  justify-content:center;
+  gap:13px;
+  margin:38px 0 0;
+}
+
+.time-unit {
+  width:76px;
+  padding:13px 5px 10px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:12px;
+  background:linear-gradient(145deg,rgba(255,255,255,.07),rgba(255,255,255,.018));
+  backdrop-filter:blur(16px);
+  box-shadow:0 12px 35px rgba(0,0,0,.12);
+}
+
+.time-unit strong {
+  display:block;
+  color:var(--gold-light);
+  font-family:"Cormorant Garamond",serif;
+  font-size:29px;
+  font-weight:500;
+}
+
+.time-unit span {
+  font-size:8px;
+  color:#999b98;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.calendar-section {
+  max-width:1250px;
+  margin:0 auto;
+  padding:15px 28px 90px;
+}
+
+.section-heading {
   display:flex;
   align-items:center;
   justify-content:space-between;
-  position:relative;
-  z-index:10;
-  border-bottom:1px solid #ffffff12;
-}
-.brand{
-  display:flex;align-items:center;gap:12px;
-  font-weight:800;font-size:12px;
-  letter-spacing:2px;
-}
-.brand-icon{
-  width:36px;height:36px;
-  display:grid;place-items:center;
-  border:1px solid #d8b77988;
-  border-radius:12px;
-  color:var(--gold);
-  font-family:'Cormorant Garamond',serif;
-  font-size:24px;
-  background:linear-gradient(145deg,#ffffff12,#ffffff02);
-  box-shadow:0 0 25px #d8b77912;
-}
-.brand small{
-  display:block;font-size:9px;
-  color:#a5aebc;letter-spacing:3px;
-  margin-top:3px;font-weight:500;
-}
-.header-actions{display:flex;gap:9px}
-.header-btn{
-  height:38px;min-width:40px;
-  border:1px solid var(--glass-border);
-  background:var(--glass);
-  color:#e8e4da;border-radius:11px;
-  cursor:pointer;transition:.25s;
-  backdrop-filter:blur(12px);
-}
-.header-btn:hover{
-  border-color:#d8b77988;
-  color:var(--gold-light);
-  background:#ffffff12;
+  margin-bottom:25px;
+  padding:0 5px;
 }
 
-/* HERO */
-.hero{
-  width:min(1150px,calc(100% - 48px));
-  margin:auto;
-  text-align:center;
-  padding:82px 0 60px;
-  position:relative;
-  z-index:2;
-}
-.hero-eyebrow{
-  font-size:10px;letter-spacing:5px;
-  text-transform:uppercase;color:var(--gold);
-  display:flex;align-items:center;justify-content:center;gap:14px;
-}
-.hero-eyebrow:before,.hero-eyebrow:after{
-  content:"";width:35px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold));
-}
-.hero-eyebrow:after{transform:rotate(180deg)}
-.hero h1{
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(66px,10vw,112px);
-  line-height:.9;
-  font-weight:600;
-  letter-spacing:-2px;
-  margin:27px 0 20px;
-  background:linear-gradient(110deg,#b38c54,#f6e5bc 40%,#d2ad70 70%,#fff0ce);
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  background-clip:text;color:transparent;
-  filter:drop-shadow(0 8px 35px #d6b57820);
-  animation:goldShimmer 12s linear infinite;
-}
-.hero-description{
-  color:#b0b8c3;font-size:14px;
-  line-height:1.8;max-width:480px;
-  margin:auto;
-}
-.hero-decoration{
-  display:flex;align-items:center;justify-content:center;
-  gap:18px;margin-top:27px;
-  color:#d7bc88;font-size:11px;letter-spacing:3px;
-}
-.hero-decoration:before,.hero-decoration:after{
-  content:"";width:40px;height:1px;background:#b7965e66;
+.section-heading h2 {
+  font-family:"Cormorant Garamond",serif;
+  font-size:27px;
+  font-weight:500;
+  color:#e9d9b7;
+  margin:0;
 }
 
-/* COUNTDOWN */
-.countdown-panel{
-  width:min(620px,calc(100% - 40px));
-  margin:0 auto 65px;
-  padding:19px 25px;
-  display:flex;align-items:center;
-  justify-content:space-between;gap:18px;
-  border:1px solid #ffffff17;
-  border-radius:18px;
-  background:linear-gradient(120deg,#ffffff0c,#ffffff04);
-  backdrop-filter:blur(18px);
-  box-shadow:0 15px 50px #0002,inset 0 1px #ffffff0b;
-  position:relative;z-index:3;
-}
-.countdown-label{
-  color:#c5b18b;font-size:9px;
-  letter-spacing:2px;line-height:1.7;
-}
-.countdown-values{display:flex;align-items:center;gap:13px}
-.time{text-align:center;min-width:38px}
-.time b{
-  display:block;font-size:22px;font-weight:600;
-  font-variant-numeric:tabular-nums;color:#f4e2bb;
-}
-.time span{font-size:8px;color:#929eae;letter-spacing:1px}
-.time-separator{color:#92764e;font-size:18px}
-
-/* CALENDAR */
-.calendar-section{
-  width:min(1200px,calc(100% - 48px));
-  margin:0 auto 100px;
-  position:relative;z-index:3;
-}
-.section-head{
-  display:flex;justify-content:space-between;
-  align-items:end;gap:20px;
-  margin-bottom:30px;
-}
-.section-head h2{
-  font-family:'Cormorant Garamond',serif;
-  font-size:42px;font-weight:600;
-  color:#f0e5d1;margin:0;
-}
-.section-head p{
-  font-size:11px;color:#99a4b4;
-  margin:7px 0 0;letter-spacing:.5px;
-}
-.progress-info{
-  font-size:10px;color:#b3b9c2;
-  text-align:right;letter-spacing:1px;
-}
-.progress-info strong{
-  display:block;font-size:17px;
-  color:var(--gold-light);margin-bottom:8px;
-}
-.progress-track{
-  width:145px;height:3px;
-  background:#ffffff19;border-radius:5px;
-  overflow:hidden;
-}
-.progress-fill{
-  width:0;height:100%;
-  background:linear-gradient(90deg,#9b7540,#f5d99e);
-  transition:width .5s;
+.section-heading span {
+  color:#92958f;
+  font-size:10px;
+  letter-spacing:1.5px;
 }
 
-/* GIFT GRID
-   Every tile is square. Larger gifts span
-   3x3 instead of being stretched. */
-.gift-grid{
+.gift-grid {
   display:grid;
   grid-template-columns:repeat(6,minmax(0,1fr));
-  grid-auto-rows:calc((min(100vw - 48px,1200px) - 80px)/6);
-  gap:16px;
+  grid-auto-rows:150px;
+  gap:15px;
   grid-auto-flow:dense;
 }
-.gift{
+
+.gift-card {
   position:relative;
+  min-width:0;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:17px;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.018));
+  box-shadow:0 15px 40px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.07);
+  backdrop-filter:blur(18px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .45s cubic-bezier(.2,.8,.2,1),border-color .4s,box-shadow .4s;
+  animation:cardEnter .8s both;
+}
+
+.gift-card:nth-child(5n+2),
+.gift-card:nth-child(9n+6) {
   grid-column:span 2;
   grid-row:span 2;
-  min-width:0;min-height:0;
-  padding:0;border:1px solid #ffffff13;
-  border-radius:17px;
-  overflow:hidden;
-  background:linear-gradient(145deg,#ffffff0c,#ffffff03);
-  box-shadow:0 12px 35px #0002,inset 0 1px #ffffff0b;
-  backdrop-filter:blur(14px);
-  cursor:pointer;
-  transition:transform .35s,border-color .35s,box-shadow .35s;
-  animation:giftAppear .8s both;
 }
-.gift:nth-child(5n+2){grid-column:span 3;grid-row:span 3}
-.gift:nth-child(9n+6){grid-column:span 3;grid-row:span 3}
-.gift:hover{
-  transform:translateY(-7px);
-  border-color:#d8b77977;
-  box-shadow:0 22px 50px #0004,0 0 25px #d8b77912;
-  z-index:4;
+
+.gift-card:hover {
+  transform:translateY(-6px) scale(1.015);
+  border-color:rgba(216,184,117,.48);
+  box-shadow:0 25px 55px rgba(0,0,0,.3),0 0 35px rgba(216,184,117,.08);
 }
-.gift:active{transform:scale(.97)}
-.gift:nth-child(2){animation-delay:.06s}
-.gift:nth-child(3){animation-delay:.12s}
-.gift:nth-child(4){animation-delay:.18s}
-.gift:nth-child(5){animation-delay:.24s}
-.gift:nth-child(n+6){animation-delay:.28s}
-@keyframes giftAppear{
-  from{opacity:0;transform:translateY(25px) scale(.95)}
-  to{opacity:1;transform:translateY(0) scale(1)}
+
+.gift-card::before {
+  content:"";
+  position:absolute;
+  width:180%;
+  height:180%;
+  left:-40%;
+  top:-40%;
+  background:radial-gradient(circle,rgba(255,255,255,.07),transparent 55%);
+  opacity:0;
+  transition:.5s;
 }
-.gift-content{
-  position:absolute;inset:0;
-  display:grid;place-items:center;
-}
-.gift-content:before{
-  content:"";position:absolute;
-  width:85%;height:85%;border-radius:50%;
-  background:radial-gradient(circle,#ffffff0c,transparent 70%);
-}
-.gift-box{
-  width:var(--gift-size,66%);
-  aspect-ratio:1;
+
+.gift-card:hover::before { opacity:1; }
+
+.gift-inner {
+  width:100%;
+  height:100%;
   position:relative;
-  border-radius:5px 5px 9px 9px;
-  background:var(--box-color);
-  box-shadow:0 18px 30px #0005,inset 0 2px #ffffff35;
-  transition:transform .35s,filter .35s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:13px;
 }
-.gift:hover .gift-box{transform:translateY(-5px) rotate(-2deg);filter:brightness(1.12)}
-.gift-box:before{
-  content:"";position:absolute;inset:0;
+
+.present {
+  position:relative;
+  width:68px;
+  height:63px;
+  flex-shrink:0;
+  filter:drop-shadow(0 12px 14px rgba(0,0,0,.3));
+  transition:transform .5s cubic-bezier(.2,.8,.2,1);
+}
+
+.gift-card:hover .present {
+  transform:translateY(-5px) rotate(-3deg) scale(1.08);
+}
+
+.present .box {
+  position:absolute;
+  bottom:0;
+  left:5px;
+  width:58px;
+  height:43px;
+  border-radius:3px 3px 6px 6px;
+  background:var(--gift);
+  box-shadow:inset -8px 0 15px rgba(0,0,0,.16),inset 2px 0 10px rgba(255,255,255,.13);
+}
+
+.present .lid {
+  position:absolute;
+  left:1px;
+  top:13px;
+  width:66px;
+  height:13px;
+  border-radius:3px;
+  background:var(--gift-light);
+  box-shadow:0 3px 5px rgba(0,0,0,.2);
+}
+
+.present .ribbon-v {
+  position:absolute;
+  left:29px;
+  top:13px;
+  bottom:0;
+  width:10px;
+  background:var(--ribbon);
+  opacity:.94;
+}
+
+.present .ribbon-h {
+  position:absolute;
+  left:5px;
+  top:29px;
+  width:58px;
+  height:9px;
+  background:var(--ribbon);
+  opacity:.94;
+}
+
+.present .bow {
+  position:absolute;
+  top:0;
+  left:24px;
+  width:20px;
+  height:13px;
+}
+
+.present .bow::before,
+.present .bow::after {
+  content:"";
+  position:absolute;
+  width:13px;
+  height:9px;
+  border:3px solid var(--ribbon);
+  border-radius:80% 80% 20% 80%;
+}
+
+.present .bow::before { left:-8px;transform:rotate(25deg); }
+.present .bow::after { right:-8px;transform:scaleX(-1) rotate(25deg); }
+
+.gift-number {
+  font-family:"Cormorant Garamond",serif;
+  color:#e6d3ad;
+  font-size:20px;
+  line-height:1;
+}
+
+.gift-label {
+  color:#a9aaa4;
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.gift-card.opened {
+  border-color:rgba(216,184,117,.4);
+  background:linear-gradient(145deg,rgba(216,184,117,.11),rgba(255,255,255,.025));
+}
+
+.gift-card.opened .gift-label { color:#d8b875; }
+
+.gift-card.locked {
+  cursor:default;
+  opacity:.58;
+  filter:saturate(.55);
+}
+
+.gift-card.locked:hover { transform:none; }
+
+.gift-card.locked .present { filter:grayscale(.35); }
+
+.gift-card.today {
+  border-color:rgba(235,205,143,.75);
+  box-shadow:0 0 0 1px rgba(216,184,117,.12),0 0 35px rgba(216,184,117,.1);
+}
+
+.gift-card.today::after {
+  content:"";
+  position:absolute;
+  inset:0;
   border-radius:inherit;
-  background:linear-gradient(135deg,#ffffff24,transparent 48%,#0000001c);
-}
-.gift-box:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,transparent 42%,#ffffff33 48%,#ffffff55 50%,#ffffff20 55%,transparent 60%);
+  border:1px solid rgba(243,223,170,.2);
+  animation:pulse 2.5s infinite;
   pointer-events:none;
 }
-.gift-lid{
-  position:absolute;z-index:3;
-  top:-8%;left:-4%;width:108%;height:19%;
-  border-radius:5px;
-  background:var(--lid-color);
-  box-shadow:0 5px 10px #0004,inset 0 1px #ffffff55;
-  transform-origin:12% 80%;
-  transition:transform .75s cubic-bezier(.2,.8,.2,1);
+
+@keyframes pulse {
+  50% { opacity:.2;transform:scale(.97); }
 }
-.gift-lid:after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(130deg,#ffffff25,transparent);
-  border-radius:inherit;
-}
-.gift-ribbon{
-  position:absolute;z-index:2;
-  left:42%;width:16%;height:100%;
-  background:linear-gradient(90deg,var(--ribbon-dark),var(--ribbon),var(--ribbon-dark));
-  box-shadow:0 0 8px #0002;
-}
-.gift-ribbon-horizontal{
-  position:absolute;z-index:2;
-  top:42%;left:0;width:100%;height:16%;
-  background:linear-gradient(180deg,var(--ribbon-dark),var(--ribbon),var(--ribbon-dark));
-}
-.gift-bow{
-  position:absolute;z-index:5;
-  width:53px;height:29px;
-  top:-26%;left:50%;
-  transform:translateX(-50%);
-}
-.gift-bow:before,.gift-bow:after{
-  content:"";position:absolute;
-  width:23px;height:18px;
-  border:5px solid var(--ribbon);
-  border-radius:70% 70% 12% 70%;
-  filter:drop-shadow(0 2px 2px #0004);
-}
-.gift-bow:before{left:0;transform:rotate(20deg)}
-.gift-bow:after{right:0;transform:scaleX(-1) rotate(20deg)}
-.gift-number{
-  position:absolute;z-index:6;
-  top:50%;left:0;right:0;
-  transform:translateY(-50%);
+
+.footer {
   text-align:center;
-  color:#fff5df;
-  font-family:'Cormorant Garamond',serif;
-  font-size:clamp(24px,3vw,39px);
-  font-weight:600;
-  text-shadow:0 2px 12px #0005;
-  pointer-events:none;
-}
-.gift-caption{
-  position:absolute;bottom:10px;left:0;right:0;
-  color:#aeb8c6;font-size:9px;
-  letter-spacing:2px;text-align:center;
-}
-.gift-locked .gift-box{filter:brightness(.65) saturate(.7)}
-.gift-locked .gift-number{color:#c5c5c5}
-.gift-watched .gift-caption{color:#dfc28b}
-.gift-watched .gift-caption:after{content:" ✓"}
-.gift-watched .gift-box{filter:brightness(.72) saturate(.75)}
-
-/* Different wrapping paper */
-.gift:nth-child(8n+1){--box-color:linear-gradient(135deg,#9d4c50,#632b34);--lid-color:#a9585b;--ribbon:#e6c78c;--ribbon-dark:#a6814e}
-.gift:nth-child(8n+2){--box-color:linear-gradient(135deg,#346c56,#193f34);--lid-color:#42765e;--ribbon:#d8bd86;--ribbon-dark:#987849}
-.gift:nth-child(8n+3){--box-color:linear-gradient(135deg,#b18c54,#74552f);--lid-color:#c09b60;--ribbon:#f2dfb1;--ribbon-dark:#a7824b}
-.gift:nth-child(8n+4){--box-color:linear-gradient(135deg,#607a99,#344b6a);--lid-color:#7087a5;--ribbon:#e3d2ae;--ribbon-dark:#a58e69}
-.gift:nth-child(8n+5){--box-color:linear-gradient(135deg,#75516f,#45314e);--lid-color:#886384;--ribbon:#e6c993;--ribbon-dark:#a98a5c}
-.gift:nth-child(8n+6){--box-color:linear-gradient(135deg,#b1b8b6,#687b7b);--lid-color:#c4cbc5;--ribbon:#f3e1b7;--ribbon-dark:#a58d68}
-.gift:nth-child(8n+7){--box-color:linear-gradient(135deg,#b36e4e,#70402f);--lid-color:#c27c59;--ribbon:#e7ca91;--ribbon-dark:#a17d4b}
-.gift:nth-child(8n){--box-color:linear-gradient(135deg,#50665b,#263f37);--lid-color:#627c69;--ribbon:#dfc18a;--ribbon-dark:#9e7948}
-
-/* OPENING */
-.gift.opening{z-index:10;pointer-events:none;animation:giftLaunch .9s forwards}
-.gift.opening .gift-lid{transform:translate(25px,-85px) rotate(38deg)}
-.gift.opening .gift-bow{transform:translate(-50%,-70px) rotate(25deg);opacity:0;transition:.7s}
-@keyframes giftLaunch{
-  0%{transform:scale(1);opacity:1}
-  35%{transform:scale(1.13) translateY(-12px);filter:brightness(1.5)}
-  100%{transform:scale(.8) translateY(-25px);opacity:0}
+  padding:25px 20px 40px;
+  color:#777d7b;
+  font-size:10px;
+  letter-spacing:2px;
+  border-top:1px solid rgba(255,255,255,.06);
 }
 
-/* MODAL */
-.modal{
-  position:fixed;inset:0;z-index:60;
-  display:none;align-items:center;justify-content:center;
+.footer-line {
+  width:45px;
+  height:1px;
+  background:var(--gold);
+  opacity:.6;
+  margin:0 auto 18px;
+}
+
+/* Intro */
+.intro {
+  position:fixed;
+  inset:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background:
+    radial-gradient(ellipse at center,rgba(104,77,44,.22),transparent 55%),
+    #10171b;
+  transition:opacity 1s,visibility 1s;
+}
+
+.intro.hide {
+  opacity:0;
+  visibility:hidden;
+}
+
+.intro-content {
+  text-align:center;
+  animation:introRise 1.3s cubic-bezier(.2,.8,.2,1) both;
+}
+
+.intro-overline {
+  color:var(--gold);
+  font-size:9px;
+  letter-spacing:6px;
+  margin-bottom:23px;
+}
+
+.intro-title {
+  font-family:"Cormorant Garamond",serif;
+  font-size:clamp(55px,10vw,105px);
+  font-weight:500;
+  color:var(--gold-light);
+  letter-spacing:-2px;
+  text-shadow:0 0 50px rgba(216,184,117,.18);
+}
+
+.intro-rule {
+  height:1px;
+  width:0;
+  margin:20px auto;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  animation:ruleGrow 1.4s .6s forwards;
+}
+
+.intro-sub {
+  color:#a9aaa4;
+  font-size:11px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  opacity:0;
+  animation:fadeUp 1s 1s forwards;
+}
+
+.intro-skip {
+  position:absolute;
+  bottom:35px;
+  background:transparent;
+  color:#888d89;
+  border:0;
+  font:inherit;
+  font-size:10px;
+  letter-spacing:2px;
+  cursor:pointer;
+}
+
+@keyframes introRise {
+  from { opacity:0;transform:translateY(35px) scale(.96);filter:blur(8px); }
+  to { opacity:1;transform:none;filter:blur(0); }
+}
+@keyframes ruleGrow { to { width:130px; } }
+@keyframes fadeUp { to { opacity:1; } }
+@keyframes fadeDown { to { opacity:1;transform:none; } }
+@keyframes heroEnter {
+  from { opacity:0;transform:translateY(35px);filter:blur(5px); }
+  to { opacity:1;transform:none;filter:blur(0); }
+}
+@keyframes lineReveal { to { transform:scaleX(1); } }
+@keyframes cardEnter {
+  from { opacity:0;transform:translateY(25px) scale(.97); }
+  to { opacity:1;transform:none; }
+}
+
+/* Modal */
+.modal {
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:none;
+  align-items:center;
+  justify-content:center;
   padding:20px;
-  background:#030711d9;
+  background:rgba(5,9,12,.82);
   backdrop-filter:blur(18px);
 }
-.modal.active{display:flex;animation:modalFade .35s}
-@keyframes modalFade{from{opacity:0}to{opacity:1}}
-.modal-card{
-  width:min(900px,100%);
-  overflow:hidden;
-  border:1px solid #ffffff22;
-  border-radius:22px;
-  background:linear-gradient(145deg,#1c2b3d,#101a29);
-  box-shadow:0 30px 100px #0008;
-  animation:modalEnter .5s cubic-bezier(.2,.8,.2,1);
-}
-@keyframes modalEnter{
-  from{transform:translateY(25px) scale(.96);opacity:0}
-  to{transform:none;opacity:1}
-}
-.modal-header{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:22px 25px;
-}
-.modal-overline{font-size:9px;letter-spacing:3px;color:var(--gold)}
-.modal-title{
-  font-family:'Cormorant Garamond',serif;
-  font-size:30px;color:#f5e8cf;margin-top:4px;
-}
-.close-btn{
-  border:1px solid #ffffff24;background:#ffffff08;
-  color:white;width:38px;height:38px;
-  border-radius:50%;font-size:20px;cursor:pointer;
-}
-.close-btn:hover{background:#ffffff18}
-.video-wrap{
-  margin:0 22px;
-  aspect-ratio:16/9;
-  border-radius:13px;
-  background:#050a12;
-  display:grid;place-items:center;
-  overflow:hidden;
-}
-.video-wrap video{width:100%;height:100%;object-fit:contain;background:#000}
-.video-placeholder{text-align:center;color:#d9c9a9;padding:25px}
-.video-placeholder .placeholder-symbol{
-  font-family:'Cormorant Garamond',serif;
-  font-size:60px;color:var(--gold);
-}
-.video-placeholder p{font-size:12px;line-height:1.8;color:#aab4c1}
-.modal-footer{
-  padding:19px 25px 24px;
-  display:flex;align-items:center;justify-content:space-between;gap:15px;
-}
-.modal-description{font-size:12px;color:#aab4c1;line-height:1.7}
-.gold-btn{
-  background:linear-gradient(120deg,#f0d8a5,#bd965a);
-  color:#18202a;border:0;border-radius:10px;
-  padding:12px 18px;font-weight:800;
-  font-size:10px;letter-spacing:1px;
-  cursor:pointer;white-space:nowrap;
-  transition:.2s;
-}
-.gold-btn:hover{filter:brightness(1.12);transform:translateY(-2px)}
 
-/* FOOTER */
-footer{
-  border-top:1px solid #ffffff12;
-  padding:35px 20px 45px;
-  text-align:center;
-  color:#778395;font-size:9px;letter-spacing:3px;
+.modal.show { display:flex;animation:modalIn .35s ease both; }
+
+@keyframes modalIn { from { opacity:0; } to { opacity:1; } }
+
+.modal-panel {
+  width:min(850px,100%);
+  border:1px solid rgba(216,184,117,.25);
+  border-radius:20px;
+  background:linear-gradient(145deg,rgba(35,42,43,.97),rgba(16,23,27,.98));
+  box-shadow:0 35px 100px rgba(0,0,0,.5);
+  overflow:hidden;
+  animation:panelIn .5s cubic-bezier(.2,.8,.2,1) both;
 }
-footer strong{
-  display:block;
+
+@keyframes panelIn {
+  from { transform:translateY(25px) scale(.97);opacity:0; }
+  to { transform:none;opacity:1; }
+}
+
+.modal-top {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 23px;
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.modal-top small {
   color:var(--gold);
-  font-family:'Cormorant Garamond',serif;
-  font-size:23px;letter-spacing:1px;
-  margin-bottom:10px;font-weight:600;
+  letter-spacing:3px;
+  font-size:9px;
 }
 
-/* TEST TAG */
-.test-tag{
-  display:none;position:fixed;bottom:15px;right:15px;
-  z-index:20;background:#263d35dd;
-  color:#e7d3a8;border:1px solid #d8b77966;
-  border-radius:9px;padding:9px 12px;
-  font-size:9px;letter-spacing:1px;
+.close {
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.05);
+  color:white;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:18px;
+}
+
+.modal-body { padding:22px; }
+
+.modal-title {
+  font-family:"Cormorant Garamond",serif;
+  font-size:35px;
+  font-weight:500;
+  color:var(--gold-light);
+  margin:0 0 7px;
+}
+
+.modal-description {
+  color:#aeb1aa;
+  font-size:12px;
+  line-height:1.8;
+  margin:0 0 20px;
+}
+
+.video-wrap {
+  background:#050809;
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:12px;
+  overflow:hidden;
+  min-height:150px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+video {
+  width:100%;
+  max-height:65vh;
+  display:block;
+}
+
+.video-placeholder {
+  text-align:center;
+  padding:45px 15px;
+  color:#aeb1aa;
+  font-size:12px;
+  line-height:2;
+}
+
+.video-placeholder strong {
+  display:block;
+  font-family:"Cormorant Garamond",serif;
+  font-size:27px;
+  font-weight:500;
+  color:var(--gold-light);
+}
+
+.modal-bottom {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-top:18px;
+}
+
+.modal-bottom span {
+  color:#888e89;
+  font-size:10px;
+}
+
+.gold-button {
+  padding:12px 18px;
+  border:1px solid rgba(216,184,117,.6);
+  border-radius:30px;
+  background:linear-gradient(110deg,#9f7944,#d8b875);
+  color:#171713;
+  font:inherit;
+  font-size:11px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.gold-button:hover { filter:brightness(1.12);transform:translateY(-2px); }
+
+.preview-label {
+  position:fixed;
+  bottom:15px;
+  right:18px;
+  z-index:8;
+  padding:7px 11px;
+  border:1px solid rgba(216,184,117,.25);
+  border-radius:30px;
+  background:rgba(20,25,26,.7);
+  color:#c8ad79;
+  font-size:8px;
+  letter-spacing:2px;
   backdrop-filter:blur(12px);
 }
 
-/* RESPONSIVE */
-@media(max-width:800px){
-  .gift-grid{
+@media(max-width:850px) {
+  .gift-grid {
     grid-template-columns:repeat(4,minmax(0,1fr));
-    grid-auto-rows:calc((min(100vw - 48px,1200px) - 48px)/4);
+    grid-auto-rows:calc((100vw - 56px - 45px)/4);
     gap:12px;
   }
-  .gift,.gift:nth-child(n){
-    grid-column:span 2;grid-row:span 2;
+  .gift-card:nth-child(5n+2),
+  .gift-card:nth-child(9n+6) {
+    grid-column:span 2;
+    grid-row:span 2;
   }
-  .gift:nth-child(7n+2){grid-column:span 2;grid-row:span 2}
-  .gift:nth-child(9n+5){grid-column:span 2;grid-row:span 2}
-  .gift-box{width:var(--gift-size,65%)}
-  .gift-number{font-size:34px}
 }
-@media(max-width:520px){
-  header{width:calc(100% - 30px);height:70px}
-  .brand{font-size:10px;gap:9px}
-  .brand-icon{width:32px;height:32px}
-  .brand small{font-size:8px}
-  .hero{padding:65px 0 48px;width:calc(100% - 30px)}
-  .hero h1{font-size:70px;letter-spacing:-1px}
-  .hero-description{font-size:13px}
-  .hero-eyebrow{font-size:8px;letter-spacing:3px}
-  .countdown-panel{
-    flex-direction:column;align-items:center;
-    gap:13px;padding:17px 12px;
-    margin-bottom:55px;
-  }
-  .countdown-label{text-align:center}
-  .countdown-values{gap:9px}
-  .time b{font-size:20px}
-  .calendar-section{width:calc(100% - 28px);margin-bottom:70px}
-  .section-head h2{font-size:34px}
-  .section-head p{font-size:10px}
-  .progress-track{width:100px}
-  .gift-grid{
+
+@media(max-width:520px) {
+  .topbar { padding:19px 18px; }
+  .brand { font-size:9px;letter-spacing:2px; }
+  .glass-button { padding:9px 11px;font-size:9px; }
+  .hero { padding:60px 15px 42px; }
+  .hero h1 { font-size:61px; }
+  .hero p { font-size:10px;line-height:1.8; }
+  .countdown { gap:7px; }
+  .time-unit { width:66px;padding:10px 3px; }
+  .time-unit strong { font-size:25px; }
+  .calendar-section { padding:10px 14px 60px; }
+  .gift-grid {
     grid-template-columns:repeat(4,minmax(0,1fr));
     grid-auto-rows:calc((100vw - 28px - 36px)/4);
-    gap:12px;
+    gap:9px;
   }
-  .gift,.gift:nth-child(n){
-    grid-column:span 2;grid-row:span 2;
-  }
-  .gift:nth-child(7n+2){grid-column:span 2;grid-row:span 2}
-  .gift-box{width:62%}
-  .gift-number{font-size:30px}
-  .gift-caption{font-size:8px;letter-spacing:1px;bottom:7px}
-  .gift-bow{transform:translateX(-50%) scale(.8)}
-  .modal{padding:10px}
-  .modal-card{border-radius:16px}
-  .modal-header{padding:16px}
-  .modal-title{font-size:25px}
-  .video-wrap{margin:0 12px}
-  .modal-footer{padding:15px;flex-direction:column;align-items:stretch}
-  .gold-btn{width:100%}
+  .gift-card { border-radius:13px; }
+  .present { transform:scale(.78);margin:-5px; }
+  .gift-card:hover .present { transform:scale(.84) translateY(-3px); }
+  .gift-number { font-size:17px; }
+  .gift-label { font-size:7px;letter-spacing:1.2px; }
+  .section-heading h2 { font-size:23px; }
+  .section-heading span { font-size:8px; }
+  .modal-body { padding:16px; }
+  .modal-title { font-size:29px; }
 }
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:.01ms!important;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="background">
-  <div class="aurora"></div>
-  <div class="warm-light one"></div>
-  <div class="warm-light two"></div>
-  <div class="warm-light three"></div>
-  <div class="vignette"></div>
-  <div class="lights" id="lights"></div>
+<div class="ambient">
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+  <div class="glow three"></div>
 </div>
 
 <canvas id="snow"></canvas>
 
-<!-- INTRO -->
 <div class="intro" id="intro">
   <div class="intro-content">
-    <div class="intro-small">A magical season begins</div>
+    <div class="intro-overline">THE MOST WONDERFUL TIME OF THE YEAR</div>
     <div class="intro-title">Christmas<br>Wonderland</div>
-    <div class="intro-line"></div>
-    <div class="intro-caption">24 DAYS · 24 SURPRISES</div>
+    <div class="intro-rule"></div>
+    <div class="intro-sub">A little magic every day</div>
   </div>
-  <button class="intro-skip" id="skipIntro">SKIP INTRO ↗</button>
+  <button class="intro-skip" onclick="closeIntro()">ÜBERSPRINGEN</button>
 </div>
 
-<header>
+<header class="topbar">
   <div class="brand">
-    <div class="brand-icon">✳</div>
-    <div>CHRISTMAS <small>WONDERLAND</small></div>
+    <div class="brand-mark"></div>
+    <span>Christmas Edition</span>
   </div>
-  <div class="header-actions">
-    <button class="header-btn" id="soundBtn" title="Sound umschalten">♫</button>
-    <button class="header-btn" id="fullscreenBtn" title="Vollbild">⛶</button>
+  <div class="actions">
+    <button class="glass-button" id="soundButton" onclick="toggleSound()">Sound: Aus</button>
+    <button class="glass-button" onclick="toggleFullscreen()">Vollbild</button>
   </div>
 </header>
 
 <main>
   <section class="hero">
-    <div class="hero-eyebrow">THE MOST WONDERFUL TIME OF THE YEAR</div>
+    <div class="eyebrow">DECEMBER · 2026</div>
     <h1>Christmas<br>Wonderland</h1>
-    <p class="hero-description">
-      24 kleine Überraschungen. 24 besondere Momente.
-      Entdecke jeden Tag ein neues Geschenk und lass
-      dich von der Magie des Dezembers überraschen.
-    </p>
-    <div class="hero-decoration">DECEMBER 2026</div>
-  </section>
+    <div class="hero-line"></div>
+    <p>24 DAYS. 24 SURPRISES. ONE MAGICAL SEASON.</p>
 
-  <section class="countdown-panel">
-    <div class="countdown-label">
-      COUNTDOWN TO<br>CHRISTMAS EVE
-    </div>
-    <div class="countdown-values">
-      <div class="time"><b id="days">00</b><span>TAGE</span></div>
-      <div class="time-separator">:</div>
-      <div class="time"><b id="hours">00</b><span>STD.</span></div>
-      <div class="time-separator">:</div>
-      <div class="time"><b id="minutes">00</b><span>MIN.</span></div>
-      <div class="time-separator">:</div>
-      <div class="time"><b id="seconds">00</b><span>SEK.</span></div>
+    <div class="countdown">
+      <div class="time-unit"><strong id="days">00</strong><span>Tage</span></div>
+      <div class="time-unit"><strong id="hours">00</strong><span>Stunden</span></div>
+      <div class="time-unit"><strong id="minutes">00</strong><span>Minuten</span></div>
+      <div class="time-unit"><strong id="seconds">00</strong><span>Sekunden</span></div>
     </div>
   </section>
 
-  <section class="calendar-section" id="calendarSection">
-    <div class="section-head">
-      <div>
-        <h2>Deine Geschenke</h2>
-        <p>Jedes Geschenk verbirgt eine neue Überraschung.</p>
-      </div>
-      <div class="progress-info">
-        <strong id="progressText">0 / 24</strong>
-        <div class="progress-track">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
-      </div>
+  <section class="calendar-section">
+    <div class="section-heading">
+      <h2>Dein Adventskalender</h2>
+      <span>24 BESONDERE MOMENTE</span>
     </div>
     <div class="gift-grid" id="giftGrid"></div>
   </section>
 </main>
 
-<footer>
-  <strong>Christmas Wonderland</strong>
-  MADE WITH A LITTLE CHRISTMAS MAGIC
+<footer class="footer">
+  <div class="footer-line"></div>
+  MADE WITH CARE · CHRISTMAS WONDERLAND 2026
 </footer>
 
-<div class="test-tag" id="testTag">PREVIEW MODE · ALL GIFTS OPEN</div>
+<div class="preview-label" id="previewLabel">PREVIEW MODE</div>
 
-<!-- VIDEO MODAL -->
-<div class="modal" id="modal">
-  <div class="modal-card">
-    <div class="modal-header">
-      <div>
-        <div class="modal-overline" id="modalOverline">DEIN GESCHENK · 01</div>
-        <div class="modal-title" id="modalTitle">Eine Überraschung</div>
-      </div>
-      <button class="close-btn" id="closeBtn" aria-label="Schließen">×</button>
+<div class="modal" id="modal" onclick="outsideClose(event)">
+  <div class="modal-panel">
+    <div class="modal-top">
+      <small id="modalDay">DECEMBER · 01</small>
+      <button class="close" onclick="closeModal()" aria-label="Schließen">×</button>
     </div>
-    <div class="video-wrap" id="videoWrap"></div>
-    <div class="modal-footer">
-      <div class="modal-description" id="modalDescription"></div>
-      <button class="gold-btn" id="doneBtn">ALS ANGESEHEN MARKIEREN ✓</button>
+    <div class="modal-body">
+      <h2 class="modal-title" id="modalTitle">Eine Überraschung</h2>
+      <p class="modal-description" id="modalDescription"></p>
+      <div class="video-wrap" id="videoWrap"></div>
+      <div class="modal-bottom">
+        <span id="modalStatus">Ein besonderer Moment wartet auf dich.</span>
+        <button class="gold-button" onclick="markWatched()">Als angesehen markieren</button>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-/* =========================================
+/* ================================
    EINSTELLUNGEN
-========================================= */
+================================ */
 
 const TEST_MODE = true;
 const YEAR = 2026;
-const STORAGE_KEY = "christmasWonderlandGlass2026";
 
-/*
-  VIDEOS EINTRAGEN:
-  video: "videos/tag1.mp4"
-
-  Die 24 Videos kannst du hier individuell
-  eintragen.
-*/
+// Hier später deine Videos eintragen.
+// Beispiel: video: "videos/tag1.mp4"
 
 const calendarData = [
-  {title:"Winter Magic",description:"Ein kleiner Start in die Weihnachtszeit.",video:""},
-  {title:"Surprise Time",description:"Heute wartet eine neue Überraschung.",video:""},
-  {title:"A Little Moment",description:"Ein besonderer Moment für deinen Dezember.",video:""},
-  {title:"Christmas Lights",description:"Ein bisschen Weihnachtszauber.",video:""},
-  {title:"Golden December",description:"Eine weitere Überraschung wartet.",video:""},
-  {title:"Snowy Days",description:"Mach es dir gemütlich.",video:""},
-  {title:"Winter Wonder",description:"Ein neuer Tag, eine neue Überraschung.",video:""},
-  {title:"The Magic",description:"Lass dich überraschen.",video:""},
-  {title:"Cozy Christmas",description:"Ein kleiner Weihnachtsmoment.",video:""},
-  {title:"Special Day",description:"Heute gibt es wieder etwas zu entdecken.",video:""},
-  {title:"December Dreams",description:"Ein bisschen Magie für deinen Tag.",video:""},
-  {title:"Almost Christmas",description:"Die Weihnachtszeit rückt näher.",video:""},
-  {title:"Little Surprise",description:"Was sich wohl dahinter verbirgt?",video:""},
-  {title:"Golden Moments",description:"Ein weiterer besonderer Moment.",video:""},
-  {title:"Winter Glow",description:"Lass dich überraschen.",video:""},
-  {title:"Christmas Spirit",description:"Weihnachtsstimmung für dich.",video:""},
-  {title:"Magic Inside",description:"Ein Geschenk voller Überraschungen.",video:""},
-  {title:"Snowfall",description:"Ein winterlicher Moment.",video:""},
-  {title:"Festive Days",description:"Bald ist Weihnachten.",video:""},
-  {title:"The Countdown",description:"Nur noch wenige Tage.",video:""},
-  {title:"Almost There",description:"Die Vorfreude steigt.",video:""},
-  {title:"Christmas Eve Eve",description:"Weihnachten ist ganz nah.",video:""},
-  {title:"One More Night",description:"Morgen ist Heiligabend.",video:""},
-  {title:"Merry Christmas",description:"Frohe Weihnachten!",video:""}
+  {title:"Ein kleiner Auftakt",description:"Der Dezember beginnt. Zeit für eine kleine Überraschung.",video:""},
+  {title:"Winter Moments",description:"Ein besonderer Moment für deinen zweiten Dezember.",video:""},
+  {title:"Eine Überraschung",description:"Hinter diesem Türchen wartet etwas auf dich.",video:""},
+  {title:"A Little Magic",description:"Ein bisschen Weihnachtszauber für deinen Tag.",video:""},
+  {title:"Winter Wonderland",description:"Mach es dir gemütlich und genieße den Moment.",video:""},
+  {title:"The Golden Day",description:"Ein goldener Moment im Advent.",video:""},
+  {title:"A Special Day",description:"Eine weitere kleine Überraschung wartet.",video:""},
+  {title:"Cozy Moments",description:"Zeit für Gemütlichkeit.",video:""},
+  {title:"December Dreams",description:"Ein besonderer Tag im Dezember.",video:""},
+  {title:"The Tenth Gift",description:"Das zehnte Türchen ist für dich.",video:""},
+  {title:"Golden Lights",description:"Lichter, Wärme und ein bisschen Magie.",video:""},
+  {title:"Almost Christmas",description:"Die Vorfreude steigt.",video:""},
+  {title:"A Winter Story",description:"Ein weiterer Teil deiner Weihnachtsgeschichte.",video:""},
+  {title:"The Fourteenth Gift",description:"Eine kleine Überraschung wartet.",video:""},
+  {title:"Winter Glow",description:"Ein Moment voller winterlicher Stimmung.",video:""},
+  {title:"A Little Wonder",description:"Lass dich überraschen.",video:""},
+  {title:"Christmas Feeling",description:"Weihnachten rückt näher.",video:""},
+  {title:"The Eighteenth Gift",description:"Ein besonderer Moment für dich.",video:""},
+  {title:"Festive Moments",description:"Die festliche Zeit ist da.",video:""},
+  {title:"Four Days to Go",description:"Nur noch wenige Tage bis Weihnachten.",video:""},
+  {title:"The Final Countdown",description:"Die Spannung steigt.",video:""},
+  {title:"Almost There",description:"Morgen ist Heiligabend.",video:""},
+  {title:"Christmas Eve Eve",description:"Nur noch ein Tag.",video:""},
+  {title:"Merry Christmas",description:"Frohe Weihnachten und eine wundervolle Zeit!",video:""}
 ];
 
-/* =========================================
-   SPEICHER
-========================================= */
+const giftColors = [
+  ["#7f3439","#a94c50","#d8b875"],
+  ["#254c48","#3d7467","#d8b875"],
+  ["#78613b","#a58a54","#e4d0a0"],
+  ["#343f58","#526985","#c6b27e"],
+  ["#6c3944","#9b5360","#e0c28b"],
+  ["#40594b","#66816a","#d4bd86"]
+];
 
-let watched = [];
+const STORAGE_KEY = "christmasWonderlandGlass2026";
+let watched = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+let activeDay = null;
+let soundEnabled = false;
+let audioContext = null;
 
-try{
-  watched = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-  if(!Array.isArray(watched)) watched=[];
-}catch(e){
-  watched=[];
-}
-
-let currentDay=null;
-let activeVideo=null;
-let soundEnabled=false;
-let audioContext=null;
-
-/* =========================================
+/* ================================
    INTRO
-========================================= */
+================================ */
 
-const intro=document.getElementById("intro");
-
-function closeIntro(){
-  intro.classList.add("hide");
+function closeIntro() {
+  document.getElementById("intro").classList.add("hide");
 }
 
-document.getElementById("skipIntro").addEventListener("click",closeIntro);
+setTimeout(closeIntro, 3800);
 
-window.addEventListener("load",()=>{
-  setTimeout(closeIntro,3200);
-});
-
-/* =========================================
-   LICHTER
-========================================= */
-
-const lights=document.getElementById("lights");
-
-for(let i=0;i<24;i++){
-  const light=document.createElement("div");
-  light.className="light";
-  lights.appendChild(light);
-}
-
-/* =========================================
-   KALENDER
-========================================= */
-
-const giftGrid=document.getElementById("giftGrid");
-
-function isUnlocked(day){
-  if(TEST_MODE)return true;
-
-  const now=new Date();
-
-  return now.getFullYear()>YEAR ||
-    (now.getFullYear()===YEAR &&
-    now.getMonth()===11 &&
-    now.getDate()>=day);
-}
-
-function renderCalendar(){
-  giftGrid.innerHTML="";
-
-  calendarData.forEach((item,index)=>{
-    const day=index+1;
-    const unlocked=isUnlocked(day);
-    const seen=watched.includes(day);
-
-    const button=document.createElement("button");
-
-    button.className="gift"+
-      (!unlocked?" gift-locked":"")+
-      (seen?" gift-watched":"");
-
-    button.setAttribute("aria-label",`Türchen ${day}: ${item.title}`);
-
-    const content=document.createElement("div");
-    content.className="gift-content";
-
-    const box=document.createElement("div");
-    box.className="gift-box";
-
-    // Unterschiedliche Geschenkgrößen, aber immer quadratisch
-    const sizes=[.63,.7,.76,.67,.72,.6,.78,.66];
-    box.style.setProperty("--gift-size",Math.round(sizes[index%8]*100)+"%");
-
-    const lid=document.createElement("div");
-    lid.className="gift-lid";
-
-    const ribbon=document.createElement("div");
-    ribbon.className="gift-ribbon";
-
-    const horizontal=document.createElement("div");
-    horizontal.className="gift-ribbon-horizontal";
-
-    const bow=document.createElement("div");
-    bow.className="gift-bow";
-
-    const number=document.createElement("div");
-    number.className="gift-number";
-    number.textContent=String(day).padStart(2,"0");
-
-    box.append(lid,ribbon,horizontal,bow,number);
-    content.appendChild(box);
-
-    const caption=document.createElement("div");
-    caption.className="gift-caption";
-    caption.textContent=
-      !unlocked?"NOCH VERSCHLOSSEN":
-      seen?"BEREITS ANGESEHEN":"ÖFFNEN";
-
-    button.append(content,caption);
-
-    button.addEventListener("click",()=>openGift(day,button));
-
-    giftGrid.appendChild(button);
-  });
-
-  updateProgress();
-}
-
-function updateProgress(){
-  const count=watched.length;
-  document.getElementById("progressText").textContent=`${count} / 24`;
-  document.getElementById("progressFill").style.width=(count/24*100)+"%";
-}
-
-/* =========================================
-   GESCHENK ÖFFNEN
-========================================= */
-
-function openGift(day,element){
-  if(!isUnlocked(day)){
-    playTone(190,.12);
-    return;
-  }
-
-  currentDay=day;
-  element.classList.add("opening");
-
-  playTone(520,.16);
-  setTimeout(()=>playTone(760,.2),150);
-
-  setTimeout(()=>{
-    element.classList.remove("opening");
-    showModal(day);
-  },700);
-}
-
-function showModal(day){
-  const item=calendarData[day-1];
-
-  document.getElementById("modalOverline").textContent=
-    `DEIN GESCHENK · ${String(day).padStart(2,"0")}`;
-
-  document.getElementById("modalTitle").textContent=item.title;
-  document.getElementById("modalDescription").textContent=item.description;
-
-  const wrap=document.getElementById("videoWrap");
-  wrap.innerHTML="";
-
-  if(activeVideo){
-    activeVideo.pause();
-    activeVideo=null;
-  }
-
-  if(item.video && item.video.trim()){
-    const video=document.createElement("video");
-    video.src=item.video;
-    video.controls=true;
-    video.playsInline=true;
-    video.preload="metadata";
-    wrap.appendChild(video);
-    activeVideo=video;
-  }else{
-    const placeholder=document.createElement("div");
-    placeholder.className="video-placeholder";
-
-    const symbol=document.createElement("div");
-    symbol.className="placeholder-symbol";
-    symbol.textContent="✳";
-
-    const title=document.createElement("strong");
-    title.textContent="Hier wartet deine Überraschung";
-
-    const text=document.createElement("p");
-    text.textContent=`Füge in calendarData den Videopfad für Türchen ${day} ein.`;
-
-    placeholder.append(symbol,title,text);
-    wrap.appendChild(placeholder);
-  }
-
-  document.getElementById("modal").classList.add("active");
-  document.body.style.overflow="hidden";
-}
-
-function closeModal(){
-  document.getElementById("modal").classList.remove("active");
-  document.body.style.overflow="";
-
-  if(activeVideo){
-    activeVideo.pause();
-    activeVideo=null;
-  }
-
-  currentDay=null;
-}
-
-document.getElementById("closeBtn").addEventListener("click",closeModal);
-
-document.getElementById("doneBtn").addEventListener("click",()=>{
-  if(currentDay && !watched.includes(currentDay)){
-    watched.push(currentDay);
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(watched));
-    renderCalendar();
-  }
-  closeModal();
-});
-
-document.getElementById("modal").addEventListener("click",event=>{
-  if(event.target.id==="modal")closeModal();
-});
-
-document.addEventListener("keydown",event=>{
-  if(event.key==="Escape")closeModal();
-});
-
-/* =========================================
+/* ================================
    COUNTDOWN
-========================================= */
+================================ */
 
-function updateCountdown(){
-  const target=new Date(YEAR,11,24,0,0,0);
-  const now=new Date();
-  let diff=Math.max(0,target-now);
+function updateCountdown() {
+  const target = new Date(YEAR,11,24,0,0,0);
+  const now = new Date();
+  let diff = Math.max(0,target-now);
 
-  const days=Math.floor(diff/86400000);
-  diff%=86400000;
+  const d = Math.floor(diff/86400000);
+  const h = Math.floor(diff%86400000/3600000);
+  const m = Math.floor(diff%3600000/60000);
+  const s = Math.floor(diff%60000/1000);
 
-  const hours=Math.floor(diff/3600000);
-  diff%=3600000;
-
-  const minutes=Math.floor(diff/60000);
-  const seconds=Math.floor((diff%60000)/1000);
-
-  document.getElementById("days").textContent=String(days).padStart(2,"0");
-  document.getElementById("hours").textContent=String(hours).padStart(2,"0");
-  document.getElementById("minutes").textContent=String(minutes).padStart(2,"0");
-  document.getElementById("seconds").textContent=String(seconds).padStart(2,"0");
+  document.getElementById("days").textContent=String(d).padStart(2,"0");
+  document.getElementById("hours").textContent=String(h).padStart(2,"0");
+  document.getElementById("minutes").textContent=String(m).padStart(2,"0");
+  document.getElementById("seconds").textContent=String(s).padStart(2,"0");
 }
 
 updateCountdown();
 setInterval(updateCountdown,1000);
 
-/* =========================================
-   SCHNEEFALL
-========================================= */
+/* ================================
+   GESCHENKE
+================================ */
 
-const snowCanvas=document.getElementById("snow");
-const snowCtx=snowCanvas.getContext("2d");
+function canOpen(day) {
+  if(TEST_MODE) return true;
+  const now = new Date();
+  return now.getFullYear()===YEAR &&
+         now.getMonth()===11 &&
+         now.getDate()>=day;
+}
+
+function renderGifts() {
+  const grid=document.getElementById("giftGrid");
+  grid.innerHTML="";
+
+  calendarData.forEach((gift,index)=>{
+    const day=index+1;
+    const colors=giftColors[index%giftColors.length];
+    const available=canOpen(day);
+    const isWatched=watched.includes(day);
+
+    const card=document.createElement("div");
+    card.className="gift-card";
+    if(isWatched) card.classList.add("opened");
+    if(!available) card.classList.add("locked");
+
+    const today=new Date();
+    if(today.getFullYear()===YEAR &&
+       today.getMonth()===11 &&
+       today.getDate()===day) card.classList.add("today");
+
+    card.style.animationDelay=(index*.045)+"s";
+    card.style.setProperty("--gift",colors[0]);
+    card.style.setProperty("--gift-light",colors[1]);
+    card.style.setProperty("--ribbon",colors[2]);
+
+    card.innerHTML=`
+      <div class="gift-inner">
+        <div class="present">
+          <div class="bow"></div>
+          <div class="lid"></div>
+          <div class="box"></div>
+          <div class="ribbon-v"></div>
+          <div class="ribbon-h"></div>
+        </div>
+        <div class="gift-number">${String(day).padStart(2,"0")}</div>
+        <div class="gift-label">${isWatched?"ANGesehen".toUpperCase():available?"ÖFFNEN":"VERSCHLOSSEN"}</div>
+      </div>
+    `;
+
+    card.addEventListener("click",()=>{
+      if(!available) return;
+      openGift(day);
+    });
+
+    grid.appendChild(card);
+  });
+}
+
+renderGifts();
+
+/* ================================
+   GESCHENK ÖFFNEN
+================================ */
+
+function openGift(day) {
+  activeDay=day;
+  const gift=calendarData[day-1];
+
+  document.getElementById("modalDay").textContent=
+    "DECEMBER · "+String(day).padStart(2,"0");
+  document.getElementById("modalTitle").textContent=gift.title;
+  document.getElementById("modalDescription").textContent=gift.description;
+  document.getElementById("modalStatus").textContent=
+    watched.includes(day)?"Bereits angesehen":"Ein besonderer Moment wartet auf dich.";
+
+  const wrap=document.getElementById("videoWrap");
+  wrap.innerHTML="";
+
+  if(gift.video.trim()) {
+    const video=document.createElement("video");
+    video.src=gift.video;
+    video.controls=true;
+    video.playsInline=true;
+    video.preload="metadata";
+    wrap.appendChild(video);
+  } else {
+    const placeholder=document.createElement("div");
+    placeholder.className="video-placeholder";
+    placeholder.innerHTML="<strong>Ein Moment für dich</strong>Hier kannst du später dein Video oder deine Überraschung einfügen.";
+    wrap.appendChild(placeholder);
+  }
+
+  document.getElementById("modal").classList.add("show");
+  document.body.style.overflow="hidden";
+  playChime();
+}
+
+function closeModal() {
+  const video=document.querySelector("#videoWrap video");
+  if(video) video.pause();
+  document.getElementById("modal").classList.remove("show");
+  document.body.style.overflow="";
+}
+
+function outsideClose(event) {
+  if(event.target.id==="modal") closeModal();
+}
+
+function markWatched() {
+  if(!activeDay) return;
+  if(!watched.includes(activeDay)) watched.push(activeDay);
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(watched));
+  document.getElementById("modalStatus").textContent="Als angesehen gespeichert.";
+  renderGifts();
+}
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape") {
+    closeModal();
+    closeIntro();
+  }
+});
+
+/* ================================
+   SOUND
+================================ */
+
+function toggleSound() {
+  soundEnabled=!soundEnabled;
+  document.getElementById("soundButton").textContent=
+    "Sound: "+(soundEnabled?"An":"Aus");
+
+  if(soundEnabled) {
+    playChime();
+  }
+}
+
+function playChime() {
+  if(!soundEnabled) return;
+  try {
+    audioContext=audioContext||new (window.AudioContext||window.webkitAudioContext)();
+    [523.25,659.25,783.99].forEach((frequency,index)=>{
+      const oscillator=audioContext.createOscillator();
+      const gain=audioContext.createGain();
+      oscillator.type="sine";
+      oscillator.frequency.value=frequency;
+      gain.gain.setValueAtTime(.0001,audioContext.currentTime+index*.13);
+      gain.gain.exponentialRampToValueAtTime(.07,audioContext.currentTime+index*.13+.03);
+      gain.gain.exponentialRampToValueAtTime(.0001,audioContext.currentTime+index*.13+.45);
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      oscillator.start(audioContext.currentTime+index*.13);
+      oscillator.stop(audioContext.currentTime+index*.13+.5);
+    });
+  } catch(e) {}
+}
+
+/* ================================
+   VOLLBILD
+================================ */
+
+function toggleFullscreen() {
+  if(!document.fullscreenElement) {
+    document.documentElement.requestFullscreen?.();
+  } else {
+    document.exitFullscreen?.();
+  }
+}
+
+/* ================================
+   SCHNEEFALL
+================================ */
+
+const canvas=document.getElementById("snow");
+const ctx=canvas.getContext("2d");
 let flakes=[];
 
-function resizeSnow(){
-  const dpr=Math.min(devicePixelRatio||1,2);
+function resizeSnow() {
+  canvas.width=window.innerWidth*devicePixelRatio;
+  canvas.height=window.innerHeight*devicePixelRatio;
+  canvas.style.width=window.innerWidth+"px";
+  canvas.style.height=window.innerHeight+"px";
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
 
-  snowCanvas.width=innerWidth*dpr;
-  snowCanvas.height=innerHeight*dpr;
-  snowCanvas.style.width=innerWidth+"px";
-  snowCanvas.style.height=innerHeight+"px";
-
-  snowCtx.setTransform(dpr,0,0,dpr,0,0);
-
-  flakes=Array.from({
-    length:Math.min(125,Math.floor(innerWidth/7))
-  },()=>({
-    x:Math.random()*innerWidth,
-    y:Math.random()*innerHeight,
+  flakes=Array.from({length:Math.min(100,Math.floor(window.innerWidth/10))},()=>({
+    x:Math.random()*window.innerWidth,
+    y:Math.random()*window.innerHeight,
     r:Math.random()*2+0.5,
-    speed:Math.random()*.8+.25,
+    speed:Math.random()*.65+.2,
     drift:Math.random()*.5-.25,
-    opacity:Math.random()*.6+.15
+    opacity:Math.random()*.5+.15
   }));
 }
 
-function drawSnow(){
-  snowCtx.clearRect(0,0,innerWidth,innerHeight);
+function drawSnow() {
+  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
 
   flakes.forEach(f=>{
+    ctx.beginPath();
+    ctx.arc(f.x,f.y,f.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(238,235,222,${f.opacity})`;
+    ctx.fill();
+
     f.y+=f.speed;
-    f.x+=f.drift+Math.sin(f.y*.008)*.15;
+    f.x+=f.drift;
 
-    if(f.y>innerHeight+5){
+    if(f.y>window.innerHeight+5) {
       f.y=-5;
-      f.x=Math.random()*innerWidth;
+      f.x=Math.random()*window.innerWidth;
     }
-
-    if(f.x>innerWidth+5)f.x=-5;
-    if(f.x< -5)f.x=innerWidth+5;
-
-    snowCtx.beginPath();
-    snowCtx.arc(f.x,f.y,f.r,0,Math.PI*2);
-    snowCtx.fillStyle=`rgba(255,255,255,${f.opacity})`;
-    snowCtx.fill();
+    if(f.x>window.innerWidth+5) f.x=-5;
+    if(f.x<-5) f.x=window.innerWidth+5;
   });
 
   requestAnimationFrame(drawSnow);
 }
 
+window.addEventListener("resize",resizeSnow);
 resizeSnow();
 drawSnow();
-window.addEventListener("resize",resizeSnow);
-
-/* =========================================
-   SOUND
-========================================= */
-
-function playTone(freq,duration){
-  if(!soundEnabled)return;
-
-  try{
-    audioContext ||= new (window.AudioContext||window.webkitAudioContext)();
-
-    if(audioContext.state==="suspended")audioContext.resume();
-
-    const oscillator=audioContext.createOscillator();
-    const gain=audioContext.createGain();
-
-    oscillator.type="sine";
-    oscillator.frequency.value=freq;
-
-    gain.gain.setValueAtTime(.05,audioContext.currentTime);
-    gain.gain.exponentialRampToValueAtTime(
-      .001,audioContext.currentTime+duration
-    );
-
-    oscillator.connect(gain);
-    gain.connect(audioContext.destination);
-
-    oscillator.start();
-    oscillator.stop(audioContext.currentTime+duration);
-  }catch(e){}
-}
-
-document.getElementById("soundBtn").addEventListener("click",()=>{
-  soundEnabled=!soundEnabled;
-  document.getElementById("soundBtn").textContent=soundEnabled?"♫":"♪";
-  if(soundEnabled)playTone(660,.2);
-});
-
-/* =========================================
-   VOLLbild
-========================================= */
-
-document.getElementById("fullscreenBtn").addEventListener("click",()=>{
-  if(!document.fullscreenElement){
-    document.documentElement.requestFullscreen?.();
-  }else{
-    document.exitFullscreen?.();
-  }
-});
-
-/* =========================================
-   TESTMODUS
-========================================= */
-
-if(TEST_MODE){
-  document.getElementById("testTag").style.display="block";
-}
-
-/* START */
-renderCalendar();
 </script>
 </body>
 </html>
