@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b1216">
+<meta name="description" content="Der SHG Adventskalender – 24 Türchen voller Überraschungen vom Staatlichen Gymnasium Holzkirchen.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E🎄%3C/text%3E%3C/svg%3E">
 <title>SHG Adventskalender</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Manrope:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 
@@ -16,6 +18,7 @@
   --line:rgba(255,255,255,.12);
   --ease:cubic-bezier(.2,.8,.2,1);
 }
+[hidden]{display:none!important}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{
@@ -134,7 +137,7 @@ canvas{display:block}
 /* ---------- Header ---------- */
 .topbar{max-width:1400px;margin:auto;padding:58px 5% 20px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:7;opacity:0;animation:fadeDown 1s .25s var(--ease) forwards}
 .brand{display:flex;align-items:center;gap:13px;color:var(--gold-light);font-size:10px;letter-spacing:3.5px;text-transform:uppercase}
-.brand-symbol{width:30px;height:30px;position:relative;display:grid;place-items:center;animation:spin 14s linear infinite}
+.brand-symbol{width:30px;height:30px;position:relative;display:grid;place-items:center}
 .brand-symbol::before,.brand-symbol::after{content:"";position:absolute;border:1px solid var(--gold);transform:rotate(45deg)}
 .brand-symbol::before{width:18px;height:18px}
 .brand-symbol::after{width:8px;height:8px;border-color:var(--gold-light);box-shadow:0 0 14px #d8b87588}
@@ -307,8 +310,6 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
 .time-unit:nth-child(2){animation-delay:.6s}.time-unit:nth-child(3){animation-delay:1.2s}.time-unit:nth-child(4){animation-delay:1.8s}
 @keyframes unitGlow{50%{border-color:#d8b87555;box-shadow:0 14px 34px #0003,0 0 26px #d8b87522,inset 0 1px #ffffff12}}
 .section-heading h2{position:relative;display:inline-block}
-.section-heading h2::after{content:"";position:absolute;left:0;bottom:-8px;height:1px;width:0;background:linear-gradient(90deg,var(--gold),transparent);transition:width 1.4s .4s var(--ease)}
-.section-heading.in h2::after{width:100%}
 .gift-card.today .present{animation:wiggle 3.6s ease-in-out infinite}
 @keyframes wiggle{0%,60%,100%{transform:rotate(0)}66%{transform:rotate(-7deg) scale(1.06)}72%{transform:rotate(6deg) scale(1.06)}78%{transform:rotate(-4deg)}84%{transform:rotate(2deg)}}
 .ripple{position:absolute;width:30px;height:30px;border-radius:50%;pointer-events:none;z-index:4;background:radial-gradient(circle,rgba(246,230,189,.55),transparent 70%);transform:translate(-50%,-50%) scale(0);animation:ripple .85s ease-out forwards}
@@ -399,12 +400,11 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
 .finale.on{display:block;animation:fade .9s both}
 .finale.out{display:block;animation:stageOut .8s forwards}
 #finaleFx{position:absolute;inset:0;width:100%;height:100%}
-.f-moon{position:absolute;right:7%;top:40%;width:70px;height:70px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fffdf0,#f2e2b0 55%,#cdb77c);box-shadow:0 0 50px 14px #f2e2b033;opacity:0;animation:fadeUp 2s .6s forwards}
 .f-content{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:space-between;pointer-events:none}
 .f-head{text-align:center;padding:7vh 4% 0}
 .f-title{font:400 clamp(54px,11vw,128px)/1.08 "Pinyon Script",cursive;color:#f6e3b0;text-shadow:0 0 18px #d8b87599,0 0 60px #d8b87555}
-.f-title .wd{display:inline-block;white-space:nowrap;margin:0 .14em}
-.f-title .l{display:inline-block;opacity:0;transform:translateY(60px) rotateX(-70deg);filter:blur(8px);animation:letterIn 1.1s var(--ease) forwards;animation-delay:calc(var(--i)*.07s + .5s)}
+.f-title .wd{display:inline-block;white-space:nowrap;margin:0 .14em;opacity:0;animation:wipe 1.5s cubic-bezier(.3,.7,.2,1) forwards;animation-delay:calc(var(--i)*.6s + .5s)}
+@keyframes wipe{0%{opacity:0;clip-path:inset(-30% 100% -30% -5%);transform:translateY(14px)}25%{opacity:1}100%{opacity:1;clip-path:inset(-30% -10% -30% -8%);transform:none}}
 .f-sub{margin-top:12px;font:500 12px Manrope;letter-spacing:5px;color:#d9bf88;opacity:0;animation:fadeUp 1.2s 2.6s forwards}
 .f-sub small{display:block;margin-top:10px;font-size:9px;letter-spacing:3px;color:#8f9a95}
 .f-tree{width:min(330px,56vw);height:auto;overflow:visible;margin-bottom:-2px}
@@ -419,8 +419,36 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
 @keyframes ornPop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:none}}
 @keyframes starPop{from{opacity:0;transform:scale(0) rotate(-120deg)}to{opacity:1;transform:none}}
 @keyframes breathe2{50%{transform:scale(1.35);opacity:.5}}
-.f-close{position:absolute;top:22px;right:22px;z-index:3;opacity:0;pointer-events:none;transition:opacity .8s}
+.f-close{position:absolute;top:14px;left:0;right:0;display:flex;justify-content:center;gap:10px;z-index:3;opacity:0;pointer-events:none;transition:opacity .8s}
 .f-close.show{opacity:1;pointer-events:auto}
+/* ---------- Final-Politur ---------- */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes borderSpin{to{--ang:360deg}}
+@keyframes sheen{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+.gift-card[data-day="24"]{border:2px solid transparent;
+  background:linear-gradient(150deg,#2b2a22,#171a19) padding-box,conic-gradient(from var(--ang),#a87f43,#fff1c0,#d8b875,#7c5a2c,#fff1c0,#a87f43) border-box;
+  box-shadow:0 0 44px #d8b87533,0 16px 42px #0004,inset 0 1px #ffffff14;
+  animation:cardEnter .9s var(--ease) backwards,borderSpin 5s linear infinite}
+.gift-card[data-day="24"]::after{animation:sheen 4.5s ease-in-out infinite}
+.gift-card[data-day="24"] .gift-number{color:#fff1c0;text-shadow:0 0 14px #e8c77a}
+.gift-card[data-day="24"] .gift-label{color:#e8c77a}
+.gift-card.locked[data-day="24"]{opacity:.9;filter:none}
+.gift-card.nope{animation:nope .5s ease!important}
+@keyframes nope{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-5px)}80%{transform:translateX(4px)}}
+.toast{position:fixed;left:50%;bottom:34px;z-index:300;transform:translate(-50%,30px);opacity:0;pointer-events:none;padding:12px 20px;border-radius:30px;border:1px solid #d8b87566;background:#141a1cee;backdrop-filter:blur(14px);color:#f1dba7;font:500 12px Manrope;letter-spacing:.5px;transition:.5s var(--ease);max-width:90vw;text-align:center}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.star-top{width:68px;height:84px;transform-origin:50% 100%}
+.star-top .tl,.brand-tree .tl{animation:twinkle 2.2s ease-in-out infinite}
+.star-top .tstar,.brand-tree .tstar{transform-box:fill-box;transform-origin:center;animation:starPulse 2.6s ease-in-out infinite}
+.star-top .tglow{animation:breathe2 3s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+@keyframes starPulse{50%{transform:scale(1.25)}}
+.brand-tree{width:24px;height:30px;overflow:visible}
+.brand-symbol::before,.brand-symbol::after{display:none}
+.reset-wrap{margin-top:18px;letter-spacing:1px;font-size:10px;color:#7a807d}
+.reset-btn{background:transparent;border:1px solid #ffffff1a;color:#8f9a95;border-radius:30px;padding:8px 16px;font:500 10px Manrope;letter-spacing:1.5px;cursor:pointer;transition:.3s;margin:0 4px}
+.reset-btn:hover{border-color:#d8b87588;color:#f1dba7}
+.reset-btn.yes{border-color:#c4666b88;color:#e7a0a4}
+.reset-ask{display:inline-block;line-height:2.6}
 /* ---------- Responsive ---------- */
 @media(max-width:850px){
   .gift-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:calc((100vw - 56px - 45px)/4);gap:12px}
@@ -500,33 +528,27 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
 <svg class="garland" id="garland" aria-hidden="true"></svg>
 
 <header class="topbar">
-  <div class="brand"><div class="brand-symbol"></div><span class="brand-text"><b>SHG</b><em>Staatliches Gymnasium Holzkirchen</em></span></div>
+  <div class="brand"><div class="brand-symbol"><svg class="brand-tree"  viewBox="0 0 64 80" aria-hidden="true"><defs><linearGradient id="btg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3a9a74"/><stop offset="1" stop-color="#14543d"/></linearGradient><radialGradient id="bts"><stop offset="0" stop-color="#fffbe8"/><stop offset=".55" stop-color="#f1d58f"/><stop offset="1" stop-color="#a87f43"/></radialGradient></defs><circle cx="32" cy="8" r="13" fill="#f6e3a0" opacity=".25" class="tglow"/><rect x="28" y="69" width="8" height="9" rx="1" fill="#5a3d22"/><polygon points="32,40 8,70 56,70" fill="url(#btg)" stroke="#5cb594" stroke-width=".6" stroke-linejoin="round"/><polygon points="32,24 14,52 50,52" fill="url(#btg)" stroke="#5cb594" stroke-width=".6" stroke-linejoin="round"/><polygon points="32,10 19,34 45,34" fill="url(#btg)" stroke="#5cb594" stroke-width=".6" stroke-linejoin="round"/><circle class="tl" cx="30" cy="22" r="1.7" fill="#ffd98a" style="animation-delay:0.00s"/><circle class="tl" cx="35" cy="29" r="1.7" fill="#ff7b7b" style="animation-delay:0.37s"/><circle class="tl" cx="25" cy="38" r="1.7" fill="#8fe3c4" style="animation-delay:0.74s"/><circle class="tl" cx="40" cy="40" r="1.7" fill="#a9c4ff" style="animation-delay:1.11s"/><circle class="tl" cx="30" cy="48" r="1.7" fill="#fff1c0" style="animation-delay:1.48s"/><circle class="tl" cx="41" cy="56" r="1.7" fill="#ffd98a" style="animation-delay:1.85s"/><circle class="tl" cx="21" cy="58" r="1.7" fill="#ff7b7b" style="animation-delay:2.22s"/><circle class="tl" cx="34" cy="60" r="1.7" fill="#8fe3c4" style="animation-delay:0.19s"/><circle class="tl" cx="27" cy="67" r="1.7" fill="#a9c4ff" style="animation-delay:0.56s"/><circle class="tl" cx="42" cy="66" r="1.7" fill="#fff1c0" style="animation-delay:0.93s"/><circle class="tl" cx="33" cy="52" r="1.7" fill="#ffd98a" style="animation-delay:1.30s"/><circle class="tl" cx="16" cy="64" r="1.7" fill="#ff7b7b" style="animation-delay:1.67s"/><polygon class="tstar" points="32.0,0.5 33.9,5.4 39.1,5.7 35.0,9.0 36.4,14.1 32.0,11.2 27.6,14.1 29.0,9.0 24.9,5.7 30.1,5.4" fill="url(#bts)"/></svg></div><span class="brand-text"><b>SHG</b><em>Staatliches Gymnasium Holzkirchen</em></span></div>
   <div class="actions">
-    <button class="glass-button" id="soundButton" onclick="toggleSound()">Sound: Aus</button>
+    <button class="glass-button" id="soundButton" onclick="toggleSound()">♪ Musik</button>
     <button class="glass-button" id="finaleBtn" onclick="startFinale()" style="display:none">Finale ✦</button>
-    <button class="glass-button" onclick="toggleFullscreen()">Vollbild</button>
   </div>
 </header>
 
 <main>
   <section class="hero">
     <div class="bauble b1"></div><div class="bauble b2"></div><div class="bauble b3"></div><div class="bauble b4"></div>
-    <svg class="star-top" id="starTop" viewBox="0 0 64 64" aria-hidden="true">
-      <defs><radialGradient id="sg"><stop offset="0" stop-color="#fffbe8"/><stop offset=".5" stop-color="#f1d58f"/><stop offset="1" stop-color="#a87f43"/></radialGradient></defs>
-      <g class="rays"><path d="M32 2 36 28 62 32 36 36 32 62 28 36 2 32 28 28Z" fill="url(#sg)"/><path d="M32 12 34 30 52 32 34 34 32 52 30 34 12 32 30 30Z" fill="#fff" opacity=".55" transform="rotate(45 32 32)"/></g>
-      <circle cx="32" cy="32" r="5" fill="#fffdf2"/>
-    </svg>
+    <svg class="star-top" id="starTop" viewBox="0 0 64 80" aria-hidden="true"><defs><linearGradient id="htg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#3a9a74"/><stop offset="1" stop-color="#14543d"/></linearGradient><radialGradient id="hts"><stop offset="0" stop-color="#fffbe8"/><stop offset=".55" stop-color="#f1d58f"/><stop offset="1" stop-color="#a87f43"/></radialGradient></defs><circle cx="32" cy="8" r="13" fill="#f6e3a0" opacity=".25" class="tglow"/><rect x="28" y="69" width="8" height="9" rx="1" fill="#5a3d22"/><polygon points="32,40 8,70 56,70" fill="url(#htg)" stroke="#5cb594" stroke-width=".6" stroke-linejoin="round"/><polygon points="32,24 14,52 50,52" fill="url(#htg)" stroke="#5cb594" stroke-width=".6" stroke-linejoin="round"/><polygon points="32,10 19,34 45,34" fill="url(#htg)" stroke="#5cb594" stroke-width=".6" stroke-linejoin="round"/><circle class="tl" cx="30" cy="22" r="1.7" fill="#ffd98a" style="animation-delay:0.00s"/><circle class="tl" cx="35" cy="29" r="1.7" fill="#ff7b7b" style="animation-delay:0.37s"/><circle class="tl" cx="25" cy="38" r="1.7" fill="#8fe3c4" style="animation-delay:0.74s"/><circle class="tl" cx="40" cy="40" r="1.7" fill="#a9c4ff" style="animation-delay:1.11s"/><circle class="tl" cx="30" cy="48" r="1.7" fill="#fff1c0" style="animation-delay:1.48s"/><circle class="tl" cx="41" cy="56" r="1.7" fill="#ffd98a" style="animation-delay:1.85s"/><circle class="tl" cx="21" cy="58" r="1.7" fill="#ff7b7b" style="animation-delay:2.22s"/><circle class="tl" cx="34" cy="60" r="1.7" fill="#8fe3c4" style="animation-delay:0.19s"/><circle class="tl" cx="27" cy="67" r="1.7" fill="#a9c4ff" style="animation-delay:0.56s"/><circle class="tl" cx="42" cy="66" r="1.7" fill="#fff1c0" style="animation-delay:0.93s"/><circle class="tl" cx="33" cy="52" r="1.7" fill="#ffd98a" style="animation-delay:1.30s"/><circle class="tl" cx="16" cy="64" r="1.7" fill="#ff7b7b" style="animation-delay:1.67s"/><polygon class="tstar" points="32.0,0.5 33.9,5.4 39.1,5.7 35.0,9.0 36.4,14.1 32.0,11.2 27.6,14.1 29.0,9.0 24.9,5.7 30.1,5.4" fill="url(#hts)"/></svg>
     <div class="eyebrow">ADVENT · 2026</div>
     <div class="script">Frohe Vorweihnachtszeit</div>
     <h1 id="title" aria-label="SHG Adventskalender"></h1>
     <div class="hero-line"></div>
-    <p>24 TÜRCHEN · 24 ÜBERRASCHUNGEN · EINE MAGISCHE ADVENTSZEIT</p>
-    <div class="countdown" id="countdown">
+        <div class="countdown" id="countdown">
       <div class="time-unit"><strong id="days">00</strong><span>Tage</span></div>
       <div class="time-unit"><strong id="hours">00</strong><span>Stunden</span></div>
       <div class="time-unit"><strong id="minutes">00</strong><span>Minuten</span></div>
       <div class="time-unit"><strong id="seconds">00</strong><span>Sekunden</span></div>
-      <div class="zero-msg"><small>✦ ES IST SOWEIT ✦</small><strong>Frohe Weihnachten</strong></div>
+      <div class="zero-msg"><small>✦ ES IST SOWEIT ✦</small><strong>Frohe Weihnachten</strong><button class="gold-button" onclick="openFinalDoor()">Türchen 24 öffnen</button></div>
     </div>
   </section>
 
@@ -545,8 +567,14 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
   </section>
 </main>
 
-<footer class="footer"><div class="footer-line"></div>SHG ADVENTSKALENDER 2026 · STAATLICHES GYMNASIUM HOLZKIRCHEN</footer>
-<div class="preview-label" id="previewLabel">PREVIEW MODE</div>
+<footer class="footer"><div class="footer-line"></div>SHG ADVENTSKALENDER 2026 · STAATLICHES GYMNASIUM HOLZKIRCHEN
+  <div class="reset-wrap">
+    <button class="reset-btn" id="resetBtn" onclick="askReset()">Fortschritt zurücksetzen</button>
+    <span class="reset-ask" id="resetAsk" hidden>Wirklich alles zurücksetzen?
+      <button class="reset-btn yes" onclick="doReset()">Ja, zurücksetzen</button>
+      <button class="reset-btn" onclick="cancelReset()">Abbrechen</button></span>
+  </div>
+</footer>
 
 <div class="modal" id="modal" onclick="outsideClose(event)">
   <div class="modal-rays"></div>
@@ -572,6 +600,7 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
   </div>
 </div>
 
+<div class="toast" id="toast" role="status"></div>
 <div class="stage" id="stage" aria-hidden="true">
   <div class="stage-rays"></div><div class="stage-halo"></div><div class="stage-beam"></div>
   <div class="stage-gift" id="stageGift"></div>
@@ -582,14 +611,14 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
 
 <div class="finale" id="finale" aria-hidden="true">
   <canvas id="finaleFx"></canvas>
-  <div class="f-moon"></div>
   <div class="f-content" id="fContent"></div>
-  <button class="glass-button f-close" id="fClose" onclick="endFinale()">Zurück zum Kalender</button>
+  <div class="f-close" id="fClose"><button class="gold-button" onclick="openFinalDoor()">Türchen 24 öffnen</button><button class="glass-button" onclick="endFinale()">Zum Kalender</button></div>
 </div>
 
 <script>
 /* ============ EINSTELLUNGEN ============ */
-const TEST_MODE=true;               // false = Türchen öffnen sich erst am jeweiligen Tag
+// Testmodus: nur aktiv, wenn ?test an die Adresse gehängt wird (z. B. kalender.html?test). Sonst öffnen sich die Türchen erst am jeweiligen Tag.
+const TEST_MODE=new URLSearchParams(location.search).has("test");
 const YEAR=2026;
 const STORAGE_KEY="christmasWonderlandGlass2026";
 
@@ -637,7 +666,7 @@ let opened=[],zeroDone=false,finaleOn=false;
 try{watched=JSON.parse(localStorage.getItem(STORAGE_KEY)||"[]")}catch(e){}
 try{opened=JSON.parse(localStorage.getItem(STORAGE_KEY+"_open")||"[]")}catch(e){}
 if(!Array.isArray(watched))watched=[];if(!Array.isArray(opened))opened=[];
-let activeDay=null,soundEnabled=false;
+let activeDay=null,soundEnabled=true;
 let mouse={x:innerWidth/2,y:innerHeight/2};
 
 function sizeCanvas(c){
@@ -789,13 +818,18 @@ const BADGE=`<svg class="badge" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1
 /* ============ GIFTS ============ */
 function canOpen(day){
  if(TEST_MODE)return true;
- const n=new Date();return n.getFullYear()===YEAR&&n.getMonth()===11&&n.getDate()>=day;
+ const n=new Date();
+ if(n.getFullYear()>YEAR)return true;
+ return n.getFullYear()===YEAR&&n.getMonth()===11&&n.getDate()>=day;
 }
 function updateProgress(){
  $("progressNum").textContent=watched.length;
  $("progressBar").style.width=(watched.length/24*100)+"%";
 }
 function ripple(card,e){const r=card.getBoundingClientRect(),s=document.createElement('span');s.className='ripple';s.style.left=(e.clientX-r.left)+'px';s.style.top=(e.clientY-r.top)+'px';card.appendChild(s);setTimeout(()=>s.remove(),900)}
+let toastT=null;
+function toast(msg){const t=$("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2600)}
+function lockedNudge(card,day){card.classList.remove("nope");void card.offsetWidth;card.classList.add("nope");toast("Türchen "+day+" öffnet sich am "+day+". Dezember ✦")}
 function renderGifts(animate=true){
  const grid=$("giftGrid");grid.innerHTML="";
  const now=new Date();
@@ -811,7 +845,7 @@ function renderGifts(animate=true){
   if(!available)card.classList.add("locked");
   if(now.getFullYear()===YEAR&&now.getMonth()===11&&now.getDate()===day)card.classList.add("today");
   card.style.animationDelay=animate?(index*.05+1.3)+"s":"0s";
-  if(!animate)card.style.animation="none";
+  if(!animate)card.style.animation=day===24?"borderSpin 5s linear infinite":"none";
   card.style.setProperty("--gift",colors[0]);card.style.setProperty("--paper",colors[1]);card.style.setProperty("--ribbon",colors[2]);
   card.style.setProperty("--n",index);
   const h1=((day*2654435761)>>>0)%1000/1000,h2=((day*40503+7)%97)/97,left=h1>.5,mag=14+h2*24;
@@ -819,9 +853,9 @@ function renderGifts(animate=true){
   card.innerHTML=`<div class="halo"></div><div class="today-ring"></div>${BADGE}
    <div class="gift-inner">${giftSVG(index)}
     <div class="gift-number">${String(day).padStart(2,"0")}</div>
-    <div class="gift-label">${isWatched?"Angesehen":opened.includes(day)?"Geöffnet":available?"Öffnen":"Verschlossen"}</div>
+    <div class="gift-label">${isWatched?"Angesehen":opened.includes(day)?"Geöffnet":day===24?(available?"Heiligabend ✦":"Heiligabend"):available?"Öffnen":"Verschlossen"}</div>
    </div>`;
-  card.addEventListener("click",e=>{ripple(card,e);if(available)openGift(day,card)});
+  card.addEventListener("click",e=>{ripple(card,e);if(available)openGift(day,card);else lockedNudge(card,day)});
   let emb=null;
   card.addEventListener("mouseenter",()=>{if(!available||reduce)return;clearInterval(emb);emb=setInterval(()=>{const r=card.getBoundingClientRect();parts.push({t:"s",x:r.left+r.width*rand(.3,.7),y:r.top+r.height*rand(.35,.65),vx:rand(-.4,.4),vy:-rand(.6,1.6),life:.9,decay:.03,r:rand(.8,1.8),g:-.012,c:"246,222,160"});startFX()},90)});
   card.addEventListener("mouseleave",()=>clearInterval(emb));
@@ -964,7 +998,14 @@ const SONGS=[
   mel:"G4:1.5 F4:.5 E4:1 D4:1 C4:1 D4:1 E4:1 C4:1 D4:.5 E4:.5 F4:.5 D4:.5 E4:1.5 D4:.5 C4:1 B3:1 C4:2",
   ch:"C:4 C:4 G:4 C:4"}
 ];
-let musicSess=null,songIdx=0,noiseBuf=null;
+let musicSess=null,noiseBuf=null,songOrder=[],songPos=0;
+function nextSong(){
+ if(songPos>=songOrder.length){
+  const last=songOrder[songOrder.length-1];songOrder=SONGS.map((_,i)=>i).sort(()=>Math.random()-.5);
+  if(songOrder.length>1&&songOrder[0]===last)songOrder.push(songOrder.shift());songPos=0;
+ }
+ return SONGS[songOrder[songPos++]];
+}
 function celesta(freq,t,vol,dur,S){
  const g=actx.createGain();g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.008);g.gain.exponentialRampToValueAtTime(.0001,t+Math.min(2.2,dur+.9));
  [[1,1],[2,.28],[4.02,.09]].forEach(([m,a])=>{const o=actx.createOscillator(),og=actx.createGain();o.type="sine";o.frequency.value=freq*m;og.gain.value=a;o.connect(og);og.connect(g);o.start(t);o.stop(t+dur+1.1)});
@@ -984,21 +1025,21 @@ function shaker(t,vol,S){
 }
 function playSong(){
  if(!soundEnabled||!actx||!musicSess)return;
- const so=SONGS[songIdx%SONGS.length],spb=60/so.bpm,t0=actx.currentTime+.3,S=musicSess;
+ const so=nextSong(),tr=[0,0,2,-2,3][Math.floor(Math.random()*5)],spb=60/(so.bpm*(.95+Math.random()*.1)),t0=actx.currentTime+.3,S=musicSess;
  let mel=[],ch=[];for(let r=0;r<so.reps;r++){mel=mel.concat(parseSeq(so.mel));ch=ch.concat(parseSeq(so.ch,true))}
  let t=t0;
- mel.forEach(n=>{if(n.n!=null)celesta(mtof(n.n+12),t,.085,n.d*spb,S);t+=n.d*spb});
+ mel.forEach(n=>{if(n.n!=null)celesta(mtof(n.n+12+tr),t,.085,n.d*spb,S);t+=n.d*spb});
  const total=t-t0;let ct=t0;
  ch.forEach(c=>{
   if(c.n!=="R"){const tri=CHD[c.n],dur=c.d*spb;
-   tri.forEach(m=>padv(mtof(m),ct,dur+.4,S));
-   for(let b=0;b<c.d;b++)celesta(mtof(tri[b%3]+12),ct+b*spb,.02,spb*1.4,S);
+   tri.forEach(m=>padv(mtof(m+tr),ct,dur+.4,S));
+   for(let b=0;b<c.d;b++)celesta(mtof(tri[b%3]+12+tr),ct+b*spb,.02,spb*1.4,S);
   }
   ct+=c.d*spb;
  });
  if(so.shake)for(let b=0;b<total/spb*2;b++)shaker(t0+b*spb/2,b%2?.007:.014,S);
  updateSoundBtn(so.name);
- musicTimer=setTimeout(()=>{songIdx++;playSong()},(total+3)*1000);
+ musicTimer=setTimeout(playSong,(total+3)*1000);
 }
 function startMusic(){
  stopMusic();
@@ -1018,9 +1059,14 @@ function toggleSound(){
  if(soundEnabled){initAudio();actx.resume();updateSoundBtn("An");playChime(true);startMusic()}
  else{stopMusic();updateSoundBtn()}
 }
-function toggleFullscreen(){
- if(!document.fullscreenElement)document.documentElement.requestFullscreen?.();
- else document.exitFullscreen?.();
+
+/* ============ ZURÜCKSETZEN ============ */
+function askReset(){$("resetBtn").hidden=true;$("resetAsk").hidden=false}
+function cancelReset(){$("resetBtn").hidden=false;$("resetAsk").hidden=true}
+function doReset(){
+ watched=[];opened=[];
+ try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(STORAGE_KEY+"_open");sessionStorage.removeItem("shgFinale")}catch(e){}
+ renderGifts(false);cancelReset();toast("Alles zurückgesetzt ✦");
 }
 
 /* ============ REVEAL (Geschenk-Show) ============ */
@@ -1194,7 +1240,7 @@ addEventListener("scroll",()=>{
 },{passive:true});
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.2});
 document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
-if(TEST_MODE===false)$("previewLabel").style.display="none";else $("finaleBtn").style.display="";
+if(TEST_MODE)$("finaleBtn").style.display=""
 
 let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{initSky();initSnow();sizeCanvas(fxC);buildGarland()},180)});
 initSky();initSnow();sizeCanvas(fxC);
@@ -1274,7 +1320,7 @@ function treeSVG(){
  let sp="";for(let i=0;i<10;i++){const r=i%2?5.6:13,a=-Math.PI/2+i*Math.PI/5;sp+=`${(100+Math.cos(a)*r).toFixed(1)},${(20+Math.sin(a)*r).toFixed(1)} `}
  h+=`<polygon class="fstar" points="${sp}" fill="url(#stg)"/></svg>`;return h;
 }
-function letters(txt){let i=0;return txt.split(" ").map(w=>`<span class="wd">${[...w].map(c=>`<span class="l" style="--i:${i++}">${c}</span>`).join("")}</span>`).join(" ")}
+function letters(txt){let i=0;return txt.split(" ").map(w=>`<span class="wd" style="--i:${i++}">${w}</span>`).join(" ")}
 function startFinale(){
  if(finaleOn)return;finaleOn=true;
  if($("modal").classList.contains("show"))closeModal();
@@ -1284,7 +1330,7 @@ function startFinale(){
  f.className="finale on";document.body.style.overflow="hidden";
  fwSize();
  fw.stars=Array.from({length:70},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight*.8,r:rand(.8,2),p:Math.random()*7,s:rand(.5,1.6)}));
- fw.snow=Array.from({length:Math.min(90,Math.floor(innerWidth/10))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:rand(.8,2.4),v:rand(.3,1.1),p:Math.random()*7,o:rand(.25,.7)}));
+ fw.snow=Array.from({length:Math.min(55,Math.floor(innerWidth/16))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:rand(.6,1.7),v:rand(.3,.9),p:Math.random()*7,o:rand(.12,.4)}));
  fw.rk=[];fw.sp=[];fw.on=true;fw.nextL=0;fw.nextBig=1500;
  cancelAnimationFrame(fw.raf);fw.raf=requestAnimationFrame(fwLoop);
  if(soundEnabled&&actx){const t=actx.currentTime+.1;[523.25,659.25,783.99,1046.5].forEach((q,i)=>bell(q,t+i*.12,.07,3))}
@@ -1295,6 +1341,15 @@ function endFinale(){
  const f=$("finale");f.className="finale out";$("fClose").classList.remove("show");
  setTimeout(()=>{fw.on=false;cancelAnimationFrame(fw.raf);f.className="finale";document.body.style.overflow=""},800);
 }
+function openFinalDoor(){
+ const wasFinale=finaleOn;if(wasFinale)endFinale();
+ setTimeout(()=>{
+  const c=document.querySelector('.gift-card[data-day="24"]');if(!c)return;
+  c.scrollIntoView({behavior:"smooth",block:"center"});
+  if(canOpen(24))setTimeout(()=>{if(!c.classList.contains("popping"))openGift(24,c)},900);
+  else lockedNudge(c,24);
+ },wasFinale?850:0);
+}
 addEventListener("keydown",e=>{if(e.key==="Escape"&&finaleOn)endFinale()});
 addEventListener("resize",()=>{if(fw.on)fwSize()});
 function onZero(){
@@ -1303,6 +1358,17 @@ function onZero(){
  if(seen)return;
  const poll=setInterval(()=>{if(document.body.classList.contains("ready")){clearInterval(poll);try{sessionStorage.setItem("shgFinale","1")}catch(e){}setTimeout(startFinale,1500)}},400);
 }
+/* Musik: automatisch starten (Browser erlauben Ton erst nach der ersten Interaktion) */
+function tryMusic(){
+ if(!soundEnabled||musicSess)return;
+ try{initAudio()}catch(e){return}
+ actx.resume().then(()=>{if(actx.state==="running"&&soundEnabled&&!musicSess)startMusic()}).catch(()=>{});
+}
+const GESTS=["pointerdown","pointerup","click","keydown","touchend"];
+function gestHandler(){tryMusic();if(musicSess||!soundEnabled)GESTS.forEach(g=>removeEventListener(g,gestHandler,true))}
+GESTS.forEach(g=>addEventListener(g,gestHandler,true));
+tryMusic();
+
 /* Stern: 5x klicken = Finale (Easter Egg) */
 (function(){
  const st=$("starTop");let clicks=[];st.style.pointerEvents="auto";st.style.cursor="pointer";
