@@ -334,7 +334,7 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
 .cur-ring.hot::after{width:64px;height:64px;margin:-32px;background:#d8b87514;border-color:#f6e6bd}
 @media(pointer:coarse){.cur-dot,.cur-ring{display:none}}
 
-/* ---------- SHG Extras ---------- */
+/* ---------- SGH Extras ---------- */
 .brand b{font-weight:700;letter-spacing:4px;margin-right:10px;color:#f6e6bd}.brand em{font-style:normal;opacity:.7}
 .hero h1 .w:first-child{font-size:1.2em;letter-spacing:.05em}
 .hero h1 .w:last-child{font-size:.5em;letter-spacing:-.5px;margin-top:.06em}
@@ -1065,7 +1065,7 @@ function askReset(){$("resetBtn").hidden=true;$("resetAsk").hidden=false}
 function cancelReset(){$("resetBtn").hidden=false;$("resetAsk").hidden=true}
 function doReset(){
  watched=[];opened=[];
- try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(STORAGE_KEY+"_open");sessionStorage.removeItem("shgFinale")}catch(e){}
+ try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(STORAGE_KEY+"_open");sessionStorage.removeItem("SGHFinale")}catch(e){}
  renderGifts(false);cancelReset();toast("Alles zurückgesetzt ✦");
 }
 
@@ -1354,9 +1354,9 @@ addEventListener("keydown",e=>{if(e.key==="Escape"&&finaleOn)endFinale()});
 addEventListener("resize",()=>{if(fw.on)fwSize()});
 function onZero(){
  zeroDone=true;$("countdown").classList.add("zero");
- let seen=false;try{seen=sessionStorage.getItem("shgFinale")==="1"}catch(e){}
+ let seen=false;try{seen=sessionStorage.getItem("SGHFinale")==="1"}catch(e){}
  if(seen)return;
- const poll=setInterval(()=>{if(document.body.classList.contains("ready")){clearInterval(poll);try{sessionStorage.setItem("shgFinale","1")}catch(e){}setTimeout(startFinale,1500)}},400);
+ const poll=setInterval(()=>{if(document.body.classList.contains("ready")){clearInterval(poll);try{sessionStorage.setItem("SGHFinale","1")}catch(e){}setTimeout(startFinale,1500)}},400);
 }
 /* Musik: automatisch starten (Browser erlauben Ton erst nach der ersten Interaktion) */
 function tryMusic(){
