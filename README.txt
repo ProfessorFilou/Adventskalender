@@ -1,6 +1,6 @@
 SGH Adventskalender – Videos
 
-Lege hier deine MP4-Dateien ab:
+Man muss hier die MP4-Dateien ablegen:
 
   01.mp4  → Türchen 1
   02.mp4  → Türchen 2
