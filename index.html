@@ -788,7 +788,7 @@ setTimeout(()=>{if(!document.body.classList.contains("ready")){introClosed=true;
 /* ============ TITLE LETTERS ============ */
 (function(){
  const h=$("title");let i=0;
- ["SHG","Adventskalender"].forEach(w=>{
+ ["SGH","Adventskalender"].forEach(w=>{
   const d=document.createElement("span");d.className="w";d.setAttribute("aria-hidden","true");
   [...w].forEach(ch=>{const s=document.createElement("span");s.className="l";s.style.setProperty("--i",i++);s.textContent=ch;d.appendChild(s)});
   h.appendChild(d);
