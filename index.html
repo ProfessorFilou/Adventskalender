@@ -563,7 +563,6 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
   </div>
 </header>
 
-<div id="testBadge" style="position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:9999;padding:8px 16px;border-radius:20px;background:#d8b875;color:#1a1208;font:700 11px Manrope;letter-spacing:1px;box-shadow:0 4px 20px #0006">TEST-MODUS · ALLE TÜRCHEN OFFEN</div>
 <main>
   <section class="hero">
     <div class="bauble b1"></div><div class="bauble b2"></div><div class="bauble b3"></div><div class="bauble b4"></div>
@@ -661,8 +660,7 @@ body.ready main{animation:mainIn 1.9s var(--ease) both}
 
 <script>
 /* ============ EINSTELLUNGEN ============ */
-// Testmodus: nur aktiv, wenn ?test an die Adresse gehängt wird (z. B. kalender.html?test). Sonst öffnen sich die Türchen erst am jeweiligen Tag.
- // Test: alle Türchen offen
+
 const YEAR=2026;
 const STORAGE_KEY="christmasWonderlandGlass2026";
 
@@ -783,14 +781,9 @@ function closeIntro(){
  if(introClosed)return;introClosed=true;
  if(!introBoomed){boom();setTimeout(openCurtains,420)}else openCurtains();
 }
-// TEST: Intro sofort überspringen
-introClosed=true;introBoomed=true;openCurtains();
-intro.classList.add("hide");
-/* Original Timing (auskommentiert für Test):
 setTimeout(boom,3500);
 setTimeout(closeIntro,3950);
 setTimeout(()=>{if(!document.body.classList.contains("ready")){introClosed=true;introBoomed=true;openCurtains()}},7000);
-*/
 
 /* ============ TITLE LETTERS ============ */
 (function(){
@@ -1555,7 +1548,7 @@ if(fine&&!reduce){
  const tryOpen=()=>{
   if(!document.body.classList.contains("ready")){setTimeout(tryOpen,300);return}
   const ok=canOpen(day);
-  // bei "nur heute": nur öffnen wenn Tag freigeschaltet; sonst trotzdem Karte zeigen wenn test/open
+  // bei "nur heute": nur öffnen wenn Tag freigeschaltet
   const card=document.querySelector('.gift-card[data-day="'+day+'"]');
   if(!card)return;
   card.scrollIntoView({behavior:"smooth",block:"center"});
